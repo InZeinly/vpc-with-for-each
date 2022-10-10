@@ -10,8 +10,4 @@ resource "aws_subnet" "privates" {
     for_each = var.subprivate
     cidr_block = each.value["cidr"]
     tags = each.value["tags"]
-
-    depends_on = [
-      aws_vpc.main
-    ]
 }
