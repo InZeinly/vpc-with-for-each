@@ -3,3 +3,11 @@ resource "aws_vpc" "main" {
     cidr_block = each.value["cidr"]
     tags = each.value["tags"]
 }
+
+
+resource "aws_subnet" "privates" {
+    vpc_id = aws_vpc.main.id
+    for_each = each.value.cidr
+    tags = each.value.tags
+  
+}
