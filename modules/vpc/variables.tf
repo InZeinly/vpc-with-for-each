@@ -15,9 +15,22 @@ variable "vpc" {
 
 # subnets
 
-# variable "private_subnets" {
-#   type = map(object({
-#     description = "private subnets"
-
-#   }))
-# }
+variable "subprivate" {
+  type = map(object({
+    cidr = string
+    tags = map(string)
+  }))
+  default = {
+    "Private1" = {
+      cidr = "10.0.10.0/24"
+      tags = {
+        "key" = "Private1"
+      }
+    "Private1" = {
+      cidr = "10.0.20.0/24"
+      tags = {
+        "key" = "Private1"
+      }
+    }
+  }
+}
