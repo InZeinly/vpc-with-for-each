@@ -1,4 +1,4 @@
-variable "main-vpc" {
+variable "main_vpc" {
   description = "main vpc"
   type = map(object({
     cidr_blocks = list(string)

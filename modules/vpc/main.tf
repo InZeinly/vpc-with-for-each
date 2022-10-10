@@ -1,8 +1,8 @@
 resource "aws_vpc" "main" {
-    dynamic "cidr" {
-        for_each = var.main-vpc
+    dynamic "main_vpc" {
+        for_each = var.main_vpc
         content{
-            cidr_blocks = cidr.value.cidr_blocks
+            cidr_blocks = main_vpc.value.main
         }
     }
 }
