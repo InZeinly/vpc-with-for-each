@@ -1,4 +1,4 @@
 resource "aws_vpc" "main" {
   for_each = var.main-vpc
-  cidr_block = each.value.rendered
+  cidr_block = each.value.default
 }
