@@ -6,9 +6,11 @@ resource "aws_vpc" "main" {
 
 
 resource "aws_subnet" "privates" {
-    vpc_id = var.vpc.id
     for_each = var.subprivate
     cidr_block = each.value["cidr"]
     tags = each.value["tags"]
-  
+
+    depends_on = [
+      aws_vpc.main
+    ]
 }
