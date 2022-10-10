@@ -7,7 +7,8 @@ resource "aws_vpc" "main" {
 
 resource "aws_subnet" "privates" {
     vpc_id = aws_vpc.main
-    for_each = each.value["cidr"]
+    for_each = var.subprivate
+    cidr_block = each.value["cidr"]
     tags = each.value["tags"]
   
 }
