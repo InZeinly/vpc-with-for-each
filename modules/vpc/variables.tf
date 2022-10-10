@@ -26,10 +26,12 @@ variable "subprivate" {
       tags = {
         "key" = "Private1"
       }
-    "Private1" = {
-      cidr = "10.0.20.0/24"
-      tags = {
-        "key" = "Private1"
-      }
+    }
+    "Private2" = {
+        cidr = "10.0.20.0/24"
+        tags = {
+            "key" = "Private2"
+        }
     }
   }
+}
