@@ -41,7 +41,7 @@ variable "subnets" {
             "Name" = "Public1"
         }
     }
-    "Public1" = {
+    "Public2" = {
         cidr = "10.0.2.0/24"
         tags = {
             "Name" = "Public2"
