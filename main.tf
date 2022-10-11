@@ -1,8 +1,5 @@
 provider "aws" {
-    region = var.region
-    shared_config_files      = ["/home/master/.aws/conf"]
-    shared_credentials_files = ["/home/master/.aws/creds"]
-  
+    region = var.region  
 }
 
 
