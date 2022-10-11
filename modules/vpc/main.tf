@@ -21,5 +21,5 @@ resource "aws_subnet" "privates" {
 # Internet Gateway
 resource "aws_internet_gateway" "igw" {
   for_each = aws_vpc.main
-  vpc_id = aws_vpc.main["main"].id
+  vpc_id = aws_vpc.main["cidr"].id
 }
