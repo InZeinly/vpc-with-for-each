@@ -54,5 +54,11 @@ resource "aws_route_table" "RT" {
       cidr_block = route.value.cidr_block
     }
   }
+}
 
+# RT Association
+resource "aws_route_table_association" "privates ass" {
+  for_each = aws_route_table.RT
+  subnet_id = aws_subnet.subnets.id
+  route_table_id = aws_route_table.RT.id
 }
