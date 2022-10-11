@@ -18,3 +18,11 @@ resource "aws_subnet" "privates" {
     ]
 }
 
+# Internet Gateway
+resource "aws_internet_gateway" "igw" {
+  for_each = aws_vpc.main
+  vpc_id = aws_vpc.main.id
+  depends_on = [
+    aws_internet_gateway.igw
+  ]
+}
