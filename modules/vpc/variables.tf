@@ -73,7 +73,7 @@ variable "route-tables" {
     "Private1" = {
       cidr_block = "0.0.0.0/0"
       tags = {
-        "Name" = "Private2"
+        "Name" = "Private1"
       }
     }
     "Private2" = {
