@@ -51,6 +51,8 @@ resource "aws_route_table" "RT" {
     content {
       cidr_block = route.value.cidr_block
     }
+    tags = {
+      "Name" = each.value["tags"]
+    }
   }
-
 }
