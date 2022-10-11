@@ -31,6 +31,5 @@ resource "aws_eip" "elastic" {
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.elastic.id
-  for_each = aws_subnet.subnets
-  subnet_id = each.value.id
+  subnet_id = aws_subnet.subnets["Public1"].id
 }
