@@ -57,8 +57,8 @@ resource "aws_route_table" "RT" {
 }
 
 # RT Association
-resource "aws_route_table_association" "privates_ass" {
+resource "aws_route_table_association" "ass" {
   for_each = aws_route_table.RT
-  subnet_id = aws_subnet.subnets[*]
+  subnet_id = each.value["aws_subnet.subnets"].id
   route_table_id = aws_route_table.RT[*]
 }
