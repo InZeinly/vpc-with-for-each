@@ -11,7 +11,7 @@ resource "aws_subnet" "privates" {
     for_each = var.subnets
     cidr_block = each.value["cidr"]
     tags = each.value["tags"]
-    availability_zone = data.aws_availability_zones.available[*].names
+    availability_zone = data.aws_availability_zones.available.names
 
     depends_on = [
       aws_vpc.main
