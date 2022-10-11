@@ -48,7 +48,7 @@ resource "aws_route_table" "RT" {
   vpc_id = aws_vpc.main["main"].id
 
   dynamic "route" {
-    for_each = var.rote-tables
+    for_each = var.route-tables
     content = {
       cidr_block = route.value.cidr
       tags = route.value.tags
