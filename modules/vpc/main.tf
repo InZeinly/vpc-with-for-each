@@ -21,5 +21,5 @@ resource "aws_subnet" "privates" {
 # Internet Gateway
 resource "aws_internet_gateway" "igw" {
   for_each = aws_vpc.main
-  vpc_id = aws_vpc.main.value
+  vpc_id = aws_vpc.main.key
 }
