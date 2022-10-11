@@ -45,6 +45,7 @@ resource "aws_nat_gateway" "nat" {
 # Route tables
 resource "aws_route_table" "RT" {
   for_each = var.route-tables
+  tags = each.value["tags"]
   vpc_id = aws_vpc.main["main"].id
 
   dynamic "route" {
