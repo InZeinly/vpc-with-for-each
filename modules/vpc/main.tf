@@ -41,3 +41,18 @@ resource "aws_nat_gateway" "nat" {
     aws_internet_gateway.igw
   ]
 }
+
+# Route tables
+resource "aws_route_table" "RT" {
+  for_each = var.route-tables
+  vpc_id = aws_vpc.main["main"].id
+
+  dynamic "route" {
+    for_each = var.rote-tables
+    content = {
+      cidr_block = route.value.cidr
+      tags = route.value.tags
+    }
+  }
+
+}

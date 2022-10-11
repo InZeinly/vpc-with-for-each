@@ -13,7 +13,8 @@ variable "vpc" {
     }
 }
 
-# subnets
+# Subnets
+
 variable "subnets" {
   type = map(object({
     cidr = string
@@ -24,27 +25,62 @@ variable "subnets" {
     "Private1" = {
       cidr = "10.0.10.0/24"
       tags = {
-        "key" = "Private1"
+        "Name" = "Private1"
       }
     }
     "Private2" = {
         cidr = "10.0.20.0/24"
         tags = {
-            "key" = "Private2"
+            "Name" = "Private2"
         }
     }
     #Publcs 
     "Public1" = {
         cidr = "10.0.1.0/24"
         tags = {
-            "key" = "Public1"
+            "Name" = "Public1"
         }
     }
     "Public1" = {
         cidr = "10.0.2.0/24"
         tags = {
-            "key" = "Public2"
+            "Name" = "Public2"
         }
+    }
+  }
+}
+
+# Route tables
+
+variable "route-tables" {
+  type = map(object({
+    cidr_block = string
+    tags  = map(string)
+  }))
+  default = {
+    "Public1" = {
+      cidr_block = "0.0.0.0/0"
+      tags = {
+        "Name" = "Public1"
+      }
+    }
+    "Public2" = {
+      cidr_block = "0.0.0.0/0"
+      tags = {
+        "Name" = "Public2"
+      }
+    }
+    "Private1" = {
+      cidr_block = "0.0.0.0/0"
+      tags = {
+        "Name" = "Private2"
+      }
+    }
+    "Private2" = {
+      cidr_block = "0.0.0.0/0"
+      tags = {
+        "Name" = "Private2"
+      }
     }
   }
 }
