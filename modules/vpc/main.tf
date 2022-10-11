@@ -60,5 +60,5 @@ resource "aws_route_table" "RT" {
 resource "aws_route_table_association" "privates_ass" {
   for_each = aws_route_table.RT
   subnet_id = aws_subnet.subnets[*]
-  route_table_id = aws_route_table.RT.id
+  route_table_id = aws_route_table.RT[*]
 }
