@@ -44,7 +44,6 @@ resource "aws_nat_gateway" "nat" {
 
 # Route tables
 resource "aws_route_table" "RT" {
-  gateway_id = aws_internet_gateway.igw.id
   for_each = var.route-tables
   tags = each.value["tags"]
   vpc_id = aws_vpc.main["main"].id
@@ -53,7 +52,7 @@ resource "aws_route_table" "RT" {
     for_each = var.route-tables
     content {
       cidr_block = route.value.cidr_block
-      # gateway_id = each.value.cidr_block
+      gateway_id = each.value.cidr_block
     }
   }
 }
