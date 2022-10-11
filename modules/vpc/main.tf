@@ -6,7 +6,8 @@ resource "aws_vpc" "main" {
 
 
 # ask about using other resource variable from for each to another one
-resource "aws_subnet" "privates" {
+# Creting Privates and Public
+resource "aws_subnet" "subnets" {
     vpc_id = aws_vpc.main["main"].id
     for_each = var.subnets
     cidr_block = each.value["cidr"]
@@ -18,8 +19,18 @@ resource "aws_subnet" "privates" {
     ]
 }
 
-# Internet Gateway
+# Gateways and Elastic ip
 resource "aws_internet_gateway" "igw" {
   for_each = aws_vpc.main
   vpc_id = aws_vpc.main["main"].id
+}
+
+resource "aws_eip" "elastic" {
+  vpc = true
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.elastic.id
+  for_each = aws_subnet.subnets
+  subnet_id = each.value.id
 }
