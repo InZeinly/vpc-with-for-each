@@ -51,7 +51,6 @@ resource "aws_route_table" "RT" {
     for_each = var.route-tables
     content {
       cidr_block = route.value.cidr
-      tags = route.value.tags
     }
   }
 
