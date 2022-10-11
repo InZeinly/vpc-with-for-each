@@ -16,3 +16,4 @@ resource "aws_subnet" "privates" {
       aws_vpc.main
     ]
 }
+
