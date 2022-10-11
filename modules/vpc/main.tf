@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
 # ask about using other resource variable from for each to another one
 resource "aws_subnet" "privates" {
     vpc_id = aws_vpc.main["main"].id
-    for_each = var.private
+    for_each = var.subnets
     cidr_block = each.value["cidr"]
     tags = each.value["tags"]
 
