@@ -49,7 +49,7 @@ resource "aws_route_table" "RT" {
   dynamic "route" {
     for_each = var.route-tables
     content {
-      cidr_block = route.value.cidr
+      cidr_block = route.value.cidr_block
     }
   }
 
