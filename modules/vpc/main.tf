@@ -52,7 +52,7 @@ resource "aws_route_table" "RT" {
     for_each = var.route-tables
     content {
       cidr_block = route.value.cidr_block
-      gateway_id = aws_nat_gateway[0].id
+      gateway_id = aws_nat_gateway["nat-gateway"]
       # gateway_id = each.value.cidr_block # Check
     }
   }
