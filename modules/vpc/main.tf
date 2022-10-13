@@ -42,9 +42,12 @@ resource "aws_nat_gateway" "nat" {
   ]
 }
 
+output "nat" {
+  value = aws_nat_gateway.nat.id
+}
+
 # Route tables
 resource "aws_route_table" "RT" {
-  gateway_id = aws_nat_gateway["nat-gateway"].id
   for_each = var.route-tables
   tags = each.value["tags"]
   vpc_id = aws_vpc.main["main"].id
