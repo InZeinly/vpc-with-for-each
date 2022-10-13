@@ -42,10 +42,6 @@ resource "aws_nat_gateway" "nat" {
   ]
 }
 
-output "nat" {
-  value = aws_nat_gateway.nat.id
-}
-
 # Route tables
 resource "aws_route_table" "RT" {
   for_each = var.route-tables
