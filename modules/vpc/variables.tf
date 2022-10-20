@@ -15,7 +15,7 @@ variable "vpc" {
 
 # Subnets
 
-variable "subnets" {
+variable "subnets_priv" {
   type = map(object({
     cidr = string
     tags = map(string)
@@ -34,7 +34,16 @@ variable "subnets" {
             "Name" = "Private2"
         }
     }
+  }
+}
+
+variable "subnets_pub" {
+  type = map(object({
+    cidr = string
+    tags = map(string)
+  }))
     #Publcs 
+  default = {
     "Public1" = {
         cidr = "10.0.1.0/24"
         tags = {
