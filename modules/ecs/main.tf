@@ -24,7 +24,7 @@ resource "aws_iam_role" "TaskExecRole" {
 data "aws_iam_policy_document" "assume_role_policy" {
     version = "2012-10-17"
     statement {
-      action = ["sts:AssumeRole"]
+      actions = ["sts:AssumeRole"]
       effect = "Allow"
       sid = ""
 
