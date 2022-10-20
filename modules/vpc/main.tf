@@ -56,19 +56,34 @@ resource "aws_nat_gateway" "nat" {
 }
 
 # Route tables
-resource "aws_route_table" "RT" {
-  for_each = var.route-tables
+resource "aws_route_table" "RT_pub" {
+  for_each = var.route-tables_pub
   tags = each.value["tags"]
   vpc_id = aws_vpc.main["main"].id
 
   dynamic "route" {
-    for_each = var.route-tables
+    for_each = var.route-tables_pub
     content {
       cidr_block = route.value.cidr_block
       gateway_id = aws_internet_gateway.igw["main"].id
     }
   }
 }
+
+resource "aws_route_table" "RT_priv" {
+  for_each = var.route-tables_priv
+  tags = each.value["tags"]
+  vpc_id = aws_vpc.main["main"].id
+
+  dynamic "route" {
+    for_each = var.route-tables_priv
+    content {
+      cidr_block = route.value.cidr_block
+      gateway_id = aws_internet_gateway.igw["main"].id
+    }
+  }
+}
+
 
 # RT Association
 # resource "aws_route_table_association" "ass" {

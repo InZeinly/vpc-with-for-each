@@ -61,7 +61,7 @@ variable "subnets_pub" {
 
 # Route tables
 
-variable "route-tables" {
+variable "route-tables_pub" {
   type = map(object({
     cidr_block = string
     tags  = map(string)
@@ -79,6 +79,15 @@ variable "route-tables" {
         "Name" = "Public2"
       }
     }
+  }
+}
+# Private rt
+variable "route-tables_priv" {
+  type = map(object({
+    cidr_block = string
+    tags  = map(string)
+  }))
+  default = {
     "Private1" = {
       cidr_block = "0.0.0.0/0"
       tags = {
