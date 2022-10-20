@@ -83,6 +83,6 @@ resource "aws_ecs_service" "ecs" {
       assign_public_ip = true
     }
     depends_on = [
-      var.aws_alb_listener , var.iam_role
+      var.aws_lb_listener , var.iam_role
     ]
 }
