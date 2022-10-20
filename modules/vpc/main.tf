@@ -66,9 +66,11 @@ resource "aws_route_table" "RT_pub" {
     content {
       cidr_block = route.value.cidr_block
       gateway_id = aws_internet_gateway.igw["main"].id
-    }
-  }
+    }resource "aws_route_table_association" "ass" {
+  subnet_id = aws_subnet.subnets_pub["Public1"].id
+  route_table_id = aws_route_table.RT_pub["Public1"].id
 }
+
 
 resource "aws_route_table" "RT_priv" {
   for_each = var.route-tables_priv
@@ -89,4 +91,7 @@ resource "aws_route_table" "RT_priv" {
 resource "aws_route_table_association" "ass" {
   subnet_id = aws_subnet.subnets_pub["Public1"].id
   route_table_id = aws_route_table.RT_pub["Public1"].id
+  tags = {
+    "Name" = "public1 rtass"
+  }
 }
