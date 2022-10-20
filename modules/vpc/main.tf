@@ -86,10 +86,22 @@ resource "aws_route_table" "RT_priv" {
 
 
 # RT Association pub
-resource "aws_route_table_association" "ass" {
+resource "aws_route_table_association" "Pub1" {
   subnet_id = aws_subnet.subnets_pub["Public1"].id
   route_table_id = aws_route_table.RT_pub["Public1"].id
-  tags = {
-    "Name" = "public1 rt ass"
-  }
+}
+
+resource "aws_route_table_association" "Pub2" {
+  subnet_id = aws_subnet.subnets_pub["Public2"].id
+  route_table_id = aws_route_table.RT_pub["Public2"].id
+}
+
+resource "aws_route_table_association" "ass" {
+  subnet_id = aws_subnet.subnets_priv["Private1"].id
+  route_table_id = aws_route_table.RT_priv["Private1"].id
+}
+
+resource "aws_route_table_association" "ass" {
+  subnet_id = aws_subnet.subnets_priv["Private2"].id
+  route_table_id = aws_route_table.RT_priv["Private2"].id
 }
