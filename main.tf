@@ -27,6 +27,6 @@ module "ecs" {
   source = "./modules/ecs"
   vpc_id = module.vpc.vpc_id
   private_subnet_cidr = module.vpc.private_subnet_cidr
-  aws_listener = module.alb.aws_lb_listener
+  alb_listener = module.alb.aws_lb_listener
   iam_role = module.ecs.iam_role
 }
