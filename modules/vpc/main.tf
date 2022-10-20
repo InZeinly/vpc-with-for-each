@@ -7,9 +7,9 @@ resource "aws_vpc" "main" {
 
 # ask about using other resource variable from for each to another one
 # Creting Privates and Public
-resource "aws_subnet" "subnets" {
+resource "aws_subnet" "subnets_pub" {
     vpc_id = aws_vpc.main["main"].id
-    for_each = var.subnets
+    for_each = var.subnets_pub
     cidr_block = each.value["cidr"]
     tags = each.value["tags"]
     #availability_zone = tostring(data.aws_availability_zones.available.names)
@@ -18,6 +18,19 @@ resource "aws_subnet" "subnets" {
       aws_vpc.main
     ]
 }
+
+# Creating Publics
+resource "aws_subnet" "subnets_pub" {
+  vpc_id = aws_vpc.main["main"].id
+  for_each = var.subnets_priv
+  cidr_block = each.value["cidr"]
+  tags = each.value["tags"]
+  
+  depends_on = [
+    aws_vpc.main
+  ]
+}
+
 
 # Gateways and Elastic ip
 resource "aws_internet_gateway" "igw" {
