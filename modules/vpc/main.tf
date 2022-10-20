@@ -96,12 +96,12 @@ resource "aws_route_table_association" "Pub2" {
   route_table_id = aws_route_table.RT_pub["Public2"].id
 }
 
-resource "aws_route_table_association" "ass" {
+resource "aws_route_table_association" "Priv1" {
   subnet_id = aws_subnet.subnets_priv["Private1"].id
   route_table_id = aws_route_table.RT_priv["Private1"].id
 }
 
-resource "aws_route_table_association" "ass" {
+resource "aws_route_table_association" "Priv2" {
   subnet_id = aws_subnet.subnets_priv["Private2"].id
   route_table_id = aws_route_table.RT_priv["Private2"].id
 }
