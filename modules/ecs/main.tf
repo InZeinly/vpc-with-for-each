@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "test_repo" {
-  name                 = "test repo"
+  name                 = "test-repo"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -13,7 +13,7 @@ resource "aws_ecr_repository" "test_repo" {
 }
 
 resource "aws_iam_role" "TaskExecRole" {
-  name = "exec role"
+  name = "exec-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   tags = {
     Name = "iam-role"
@@ -41,7 +41,7 @@ resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
 }
 
 resource "aws_ecs_cluster" "test_cluster" {
-  name = "test cluster"
+  name = "test-cluster"
   tags = {
     "Name" = "test cluster"
     Environment = "Prod"
@@ -49,7 +49,7 @@ resource "aws_ecs_cluster" "test_cluster" {
 }
 
 resource "aws_ecs_task_definition" "task-definition" {
-  family = "some name"
+  family = "some-name"
   execution_role_arn = aws_iam_role.TaskExecRole.arn
   network_mode = "awsvpc"
   requires_compatibilities = ["FAGRATE"]
@@ -71,7 +71,7 @@ resource "aws_ecs_task_definition" "task-definition" {
 }
 
 resource "aws_ecs_service" "ecs" {
-    name = "ecs service"
+    name = "ecs-service"
     cluster = aws_ecs_cluster.test_cluster.id
     task_definition = aws_ecs_task_definition.task-definition.id
     launch_type = "FARGATE"
