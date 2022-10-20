@@ -13,6 +13,6 @@ output "nat_output" {
 
 output "public_subnet_id" {
   value = [
-    for id in public_subnet_id.id : id.id
+    for id in subnets_pub : id.id
   ]
 }
