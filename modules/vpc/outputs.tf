@@ -12,5 +12,7 @@ output "nat_output" {
 
 
 output "public_subnet_id" {
-  value = values(map(aws_subnet.subnets_pub[*]))
+  value = [
+    for id in public_subnet_id.id : id.id
+  ]
 }
