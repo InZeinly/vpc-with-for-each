@@ -88,6 +88,6 @@ resource "aws_route_table" "RT_priv" {
 # RT Association pub
 resource "aws_route_table_association" "ass" {
   for_each = aws_route_table.RT_pub
-  subnet_id = aws_subnet.subnets_pub.id
-  route_table_id = aws_route_table.RT_pub.id
+  subnet_id = each.value.aws_subnet.subnets_pub.id
+  route_table_id = each.value.aws_route_table.RT_pub.id
 }
