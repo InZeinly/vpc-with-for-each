@@ -4,8 +4,6 @@ resource "aws_lb" "test" {
   load_balancer_type = "application"
   subnets = var.public_subnet_id
 
-  enable_deletion_protection = true
-
   tags = {
     "Environment" = "Prod"
   }
