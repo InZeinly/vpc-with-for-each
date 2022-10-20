@@ -52,13 +52,13 @@ resource "aws_ecs_task_definition" "task-definition" {
   family = "some-name"
   execution_role_arn = aws_iam_role.TaskExecRole.arn
   network_mode = "awsvpc"
-  requires_compatibilities = ["FAGRATE"]
+  requires_compatibilities = ["FARGATE"]
   cpu = "256"
   memory = "512"
   container_definitions = jsonencode([
     {
         name = "first"
-        image = "unknown yett"
+        # image = "unknown yett"
         essential = true
         portMappings = [
             {
