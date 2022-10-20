@@ -12,5 +12,5 @@ output "nat_output" {
 
 
 output "public_subnet_id" {
-  value = values(aws_subnet.subnets_pub[*].id)
+  value = values(aws_subnet.subnets_pub[*])
 }
