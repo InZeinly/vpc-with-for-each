@@ -22,3 +22,11 @@ module "alb" {
   public_subnet_id = module.vpc.public_subnet_id
   private_subnet_cidr = module.vpc.private_subnet_cidr
 }
+
+module "ecs" {
+  source = "./modules/ecs"
+  vpc_id = module.vpc_id.id
+  private_subnet_cidr = module.vpc.private_subnet_cidr
+  aws_lb_listener = module.alb.aws_lb_listener
+  iam_role = module.ecs.iam_role
+}
