@@ -20,7 +20,7 @@ resource "aws_subnet" "subnets_pub" {
 }
 
 # Creating Publics
-resource "aws_subnet" "subnets_pub" {
+resource "aws_subnet" "subnets_priv" {
   vpc_id = aws_vpc.main["main"].id
   for_each = var.subnets_priv
   cidr_block = each.value["cidr"]
