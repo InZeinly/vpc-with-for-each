@@ -30,3 +30,7 @@ module "ecs" {
   alb_listener = module.alb.alb_listener
   iam_role = module.ecs.iam_role
 }
+
+module "s3_bucket" {
+  source = "./modules/s3bucket"
+}
