@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "test_bucket" {
+resource "aws_s3_bucket" "inzeintestbucket2198312312" {
   bucket = "test_bucket"
 
   tags = {
