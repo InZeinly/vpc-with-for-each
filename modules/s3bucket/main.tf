@@ -7,12 +7,12 @@ resource "aws_s3_bucket" "inzeintestbucket2198312312" {
 }
 
 resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.test_bucket.id
+  bucket = aws_s3_bucket.inzeintestbucket2198312312.id
   acl    = "private"
 }
 
 resource "aws_s3_bucket_versioning" "versioning_test" {
-  bucket = aws_s3_bucket.test_bucket.id
+  bucket = aws_s3_bucket.inzeintestbucket2198312312.id
   versioning_configuration {
     status = "Enabled"
   }
