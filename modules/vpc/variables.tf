@@ -18,18 +18,21 @@ variable "vpc" {
 variable "subnets_priv" {
   type = map(object({
     cidr = string
+    az = string
     tags = map(string)
   }))
   # Privates
   default = {
     "Private1" = {
       cidr = "10.0.10.0/24"
+      az = "eu-central-1a"
       tags = {
         "Name" = "Private1"
       }
     }
     "Private2" = {
         cidr = "10.0.20.0/24"
+        az = "eu-central-1b"
         tags = {
             "Name" = "Private2"
         }
@@ -40,18 +43,21 @@ variable "subnets_priv" {
 variable "subnets_pub" {
   type = map(object({
     cidr = string
+    az = string
     tags = map(string)
   }))
     #Publcs 
   default = {
     "Public1" = {
         cidr = "10.0.1.0/24"
+        az = "eu-central-1a"
         tags = {
             "Name" = "Public1"
         }
     }
     "Public2" = {
         cidr = "10.0.2.0/24"
+        az = "eu-central-1b"
         tags = {
             "Name" = "Public2"
         }
