@@ -58,7 +58,7 @@ resource "aws_ecs_task_definition" "task-definition" {
   container_definitions = jsonencode([
     {
         name = "first"
-        # image = "unknown yett"
+        image = "asdasdasd"
         essential = true
         portMappings = [
             {
