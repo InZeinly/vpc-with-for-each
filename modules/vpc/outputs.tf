@@ -20,5 +20,5 @@ output "vpc_id" {
 }
 
 output "private_subnet_cidr" {
-  value = values(aws_subnet.subnets_priv).*.cidr_block.id
+  value = values(aws_subnet.subnets_priv).*.id
 }
