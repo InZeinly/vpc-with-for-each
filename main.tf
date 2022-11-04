@@ -38,7 +38,7 @@ module "s3_bucket" {
 
 module "codebuild" {
   source = "./modules/codebuild"
-  aws_region = var.region
+  region = var.region
   vpc_id = var.vpc_id
   private_subnet_id = var.private_subnet_id
     github_oauth_token = var.oauth
