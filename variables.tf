@@ -18,7 +18,7 @@ variable "app_count" {
     default = 1
 }
 
-variable "oauth" {}
+variable "github_oauth_token" {}
 
 # variable "vpc_id" {}
 
