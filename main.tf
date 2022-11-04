@@ -29,7 +29,6 @@ module "ecs" {
   private_subnet_cidr = module.vpc.private_subnet_id
   alb_listener = module.alb.alb_listener
   iam_role = module.ecs.iam_role
-  app_count = var.app_count
 }
 
 module "s3_bucket" {
