@@ -31,7 +31,7 @@ phases:
       - make build
       - echo "Build complete"
 
-      - cd ${CODEBUILD_SRC_DIR}"
+      - cd ${CODEBUILD_SRC_DIR}
       - terraform init 
       - terraform plan
       - terraform init
