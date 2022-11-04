@@ -30,8 +30,6 @@ variable "app_name" {
   default = "testapp"
 }
 
-variable "private_subnet_id" {}
-
 # variable "subnets" {
 #   type        = list(string)
 #   default     = priv_subnet
