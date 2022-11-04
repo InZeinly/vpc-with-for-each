@@ -21,3 +21,7 @@ variable "app_count" {
 # variable "vpc_id" {}
 
 # variable "private_subnet_id" {}
+
+variable "github_oauth_token" {
+    default = github_oauth_token
+}
