@@ -1,3 +1,5 @@
-inputs = {
-  github_oauth_token = "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"
-}
+# inputs = {
+#   github_oauth_token = "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"
+# }
+
+github_oauth_token = "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"
