@@ -3,7 +3,7 @@ variable "private_subnet_id" {}
 variable "region" {}
 
 variable "aws_region" {
-    description = "aws region"
+    default = "eu-central-1"
 }
 
 variable "github_oauth_token" {
@@ -20,4 +20,17 @@ variable "repo_url" {
 
 variable "COMMIT_MESSAGE" {
   default = "(test)$"
+}
+
+variable "environment" {
+  default = "testenv"
+}
+
+variable "app_name" {
+  default = "testapp"
+}
+
+locals {
+  codebuild_project_name = "${var.app_name}-${var.environment}"
+  description = "Codebuild for ${var.app_name} environment ${var.environment}"
 }
