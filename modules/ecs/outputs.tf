@@ -3,6 +3,5 @@ output "iam_role" {
 }
 
 output "app_count" {
-  description = "Number of docker containers to run"
-  default     = 1
+  value = var.app_count
 }
