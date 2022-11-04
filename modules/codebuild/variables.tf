@@ -34,3 +34,9 @@ locals {
   codebuild_project_name = "${var.app_name}-${var.environment}"
   description = "Codebuild for ${var.app_name} environment ${var.environment}"
 }
+
+variable "subnets" {
+  type        = list(string)
+  default     = var.private_subnet_id
+  description = "The subnet IDs that include resources used by CodeBuild"
+}
