@@ -17,3 +17,7 @@ variable "git_trigger_event" {
 variable "app_count" {
     default = 1
 }
+
+variable "vpc_id" {}
+
+variable "private_subnet_id" {}
