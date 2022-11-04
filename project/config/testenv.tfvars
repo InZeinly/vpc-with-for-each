@@ -5,6 +5,6 @@ aws_account = "152617774363"
 aws_region = "eu-central-1"
 image_tag = "0.0.1"
 repo_url = "https://github.com/InZeinly/vpc-with-for-each"
-commit_message = "(test)$"
+COMMIT_MESSAGE = "(test)$"
 git_trigger_event = "PUSH"
 app_count = 3
