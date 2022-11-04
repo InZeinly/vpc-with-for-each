@@ -20,13 +20,13 @@ module "alb" {
   source = "./modules/alb"
   vpc_id = module.vpc.vpc_id
   public_subnet_id = module.vpc.public_subnet_id
-  private_subnet_cidr = module.vpc.private_subnet_cidr
+  private_subnet_cidr = module.vpc.private_subnet_id
 }
 
 module "ecs" {
   source = "./modules/ecs"
   vpc_id = module.vpc.vpc_id
-  private_subnet_cidr = module.vpc.private_subnet_cidr
+  private_subnet_cidr = module.vpc.private_subnet_id
   alb_listener = module.alb.alb_listener
   iam_role = module.ecs.iam_role
 }
