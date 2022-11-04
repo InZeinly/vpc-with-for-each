@@ -1,5 +1,5 @@
 output "oauth" {
-  value = var.oauth
+  value = github_oauth_token
 }
 
 output "repo_url" {
