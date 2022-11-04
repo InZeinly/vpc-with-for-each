@@ -36,7 +36,7 @@ locals {
 }
 
 variable "subnets" {
-  type        = list(string)
+  # type        = list(string)
   default     = var.private_subnet_id
   description = "The subnet IDs that include resources used by CodeBuild"
 }
