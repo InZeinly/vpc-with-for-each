@@ -41,8 +41,8 @@ module "codebuild" {
   region = var.region
   vpc_id = module.vpc.vpc_id
   private_subnet_id = module.vpc.private_subnet_id
-    github_oauth_token = var.oauth
-    repo_url = repo_url
+    github_oauth_token = var.github_oauth_token
+    repo_url = var.repo_url
     # git_trigger_event = var.git_trigger_event
     COMMIT_MESSAGE = var.COMMIT_MESSAGE
     build_spec_file = "project/config/buildspec.yml"
