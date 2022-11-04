@@ -5,3 +5,7 @@ output "oauth" {
 output "repo_url" {
     value = var.repo_url
 }
+
+output "app_count" {
+  value = var.app_count
+}
