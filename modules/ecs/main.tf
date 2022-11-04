@@ -1,15 +1,15 @@
 resource "aws_ecr_repository" "test_repo" {
-  name                 = "test-repo"
+  name                 = "testapp-testenv"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
   }
 
-  tags = {
-    Name = "ecr repo"
-    Environment = "Prod"
-  }
+  # tags = {
+  #   Name = "ecr repo"
+  #   Environment = "Prod"
+  # }
 }
 
 resource "aws_iam_role" "TaskExecRole" {

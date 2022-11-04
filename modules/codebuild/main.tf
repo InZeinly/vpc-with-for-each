@@ -21,7 +21,7 @@ resource "aws_security_group" "codebuild_sg" {
 }
 
 resource "aws_codebuild_source_credential" "gitcred" {
-  auth_type = "OAUTH"
+  auth_type = "PERSONAL_ACCESS_TOKEN"
   server_type = "GITHUB"
   token = var.github_oauth_token
   
