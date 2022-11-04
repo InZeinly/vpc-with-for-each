@@ -34,3 +34,14 @@ module "ecs" {
 module "s3_bucket" {
   source = "./modules/s3bucket"
 }
+
+module "codebuild" {
+  source = "./modules/codebuild"
+    environment = testenv
+    app_name = testapp
+    github_oauth_token = var.oauth
+    repo_url = var.repo_url
+    git_trigger_event = var.git_trigger_event
+    COMMIT_MESSAGE = var.COMMIT_MESSAGE
+    build_spec_file = "project/config/buildspec.yml"
+}
