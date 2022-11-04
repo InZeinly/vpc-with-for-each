@@ -11,10 +11,13 @@ variable "github_oauth_token" {
 }
 
 variable "build_spec_file" {
-  default = "buildspec.yml"
+  default = "project/config/buildspec.yml"
 }
 
 variable "repo_url" {
-  description = "https://github.com/InZeinly/vpc-with-for-each/tree/main/project"
+  default = "https://github.com/InZeinly/vpc-with-for-each/tree/main/project"
 }
 
+variable "COMMIT_MESSAGE" {
+  default = "(test)$"
+}
