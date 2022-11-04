@@ -39,8 +39,8 @@ module "codebuild" {
   source = "./modules/codebuild"
   aws_region = var.region
   region = var.region
-  vpc_id = var.vpc_id
-  private_subnet_id = var.private_subnet_id
+  vpc_id = module.vpc.vpc_id
+  private_subnet_id = module.vpc.private_subnet_id
     github_oauth_token = github_oauth_token
     repo_url = repo_url
     # git_trigger_event = var.git_trigger_event
