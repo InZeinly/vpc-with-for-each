@@ -71,7 +71,7 @@ resource "aws_ecs_task_definition" "task-definition" {
 }
 
 resource "aws_ecs_service" "ecs" {
-    name = "ecs-service"
+    name = "test-ecs"
     cluster = aws_ecs_cluster.test_cluster.id
     task_definition = aws_ecs_task_definition.task-definition.id
     launch_type = "FARGATE"
