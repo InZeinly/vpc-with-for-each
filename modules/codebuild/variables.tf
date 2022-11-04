@@ -31,8 +31,8 @@ variable "app_name" {
 }
 
 variable "subnets" {
-  # type        = list(string)
-  default     = var.private_subnet_id
+  type        = list(string)
+  default     = priv_subnet
   description = "The subnet IDs that include resources used by CodeBuild"
 }
 
