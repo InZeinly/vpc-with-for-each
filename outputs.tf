@@ -1,3 +1,7 @@
 output "oauth" {
-  value = github_oauth_token
+  value = var.oauth
+}
+
+output "repo_url" {
+    value = var.repo_url
 }
