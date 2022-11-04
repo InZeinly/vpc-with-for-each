@@ -31,7 +31,6 @@ module "ecs" {
   iam_role = module.ecs.iam_role
   image_tag = var.image_tag
   app_name = "testapp"
-  environment = "testenv"
   app_count = var.app_count
 }
 
