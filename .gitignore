@@ -3,3 +3,5 @@ notes.terraformignore
 *.terraformignore
 secrets.hcl
 secret.tfvars
+secret.tfvars
+secret.tfvars
