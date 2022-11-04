@@ -59,7 +59,7 @@ resource "aws_codebuild_project" "democodebuild" {
 
     vpc_config {
         vpc_id = var.vpc_id
-        subnets = var.private_subnet_id
+        subnets = tolist(var.private_subnet_id)
 
         security_group_ids = [ aws_security_group.codebuild_sg.id ]
     }
