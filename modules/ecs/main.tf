@@ -59,6 +59,11 @@ resource "aws_ecs_task_definition" "task-definition" {
     {
         name = "first"
         image = "nginx:latest"
+        # added lines for test codebuild 05.10
+        image_tag = "0.0.1"
+        app_name = "testapp"
+        app_image = "testimage"
+        #
         essential = true
         portMappings = [
             {
