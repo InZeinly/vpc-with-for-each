@@ -1,5 +1,5 @@
 output "codebuild_project_name" {
-  value = aws_codebuild_project.project.name
+  value = aws_codebuild_project.democodebuild.name
 }
 
 output "repo_url" {

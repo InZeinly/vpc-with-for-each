@@ -26,12 +26,12 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_full_access" {
-  role = aws_iam_role.role.name
+  role = aws_iam_role.codebuild-role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
 
 resource "aws_iam_role_policy" "codebuild_policy" {
-  role = aws_iam_role.role.name
+  role = aws_iam_role.codebuild-role.name
   name = "codebuild-project-policy"
 
   policy = <<POLICY
