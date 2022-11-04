@@ -27,3 +27,7 @@ variable "github_oauth_token" {}
 # variable "github_oauth_token" {
 #     default = 
 # }
+
+variable "image_tag" {
+    default = "0.0.1"
+}

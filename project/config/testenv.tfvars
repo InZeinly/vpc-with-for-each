@@ -6,4 +6,4 @@ image_tag = "0.0.1"
 repo_url = "https://github.com/InZeinly/vpc-with-for-each"
 COMMIT_MESSAGE = "(test)$"
 git_trigger_event = "PUSH"
-app_count = 3
+app_count = 1
