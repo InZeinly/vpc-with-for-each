@@ -19,6 +19,6 @@ output "vpc_id" {
   value = aws_vpc.main["main"].id
 }
 
-output "private_subnet_cidr" {
+output "private_subnet_id" {
   value = values(aws_subnet.subnets_priv).*.id
 }
