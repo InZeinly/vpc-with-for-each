@@ -3,7 +3,7 @@ variable "region" {
     default = "eu-central-1"
 }
 
-variable "oauth" {}
+# variable "oauth" {}
 
 variable "repo_url" {}
 

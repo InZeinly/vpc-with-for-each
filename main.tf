@@ -41,7 +41,7 @@ module "codebuild" {
   region = var.region
   vpc_id = var.vpc_id
   private_subnet_id = var.private_subnet_id
-    github_oauth_token = var.oauth
+    github_oauth_token = github_oauth_token
     repo_url = var.repo_url
     # git_trigger_event = var.git_trigger_event
     COMMIT_MESSAGE = var.COMMIT_MESSAGE
