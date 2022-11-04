@@ -32,7 +32,7 @@ resource "aws_iam_role_policy_attachment" "ecs_full_access" {
 
 resource "aws_iam_role_policy" "codebuild_policy" {
   role = aws_iam_role.codebuild-role.name
-  name = "codebuild-project-policy"
+  name = "codebuild-policy-${local.codebuild_project_name}"
 
   policy = <<POLICY
 {
@@ -41,23 +41,119 @@ resource "aws_iam_role_policy" "codebuild_policy" {
     {
       "Effect": "Allow",
       "Action": [
-            "ec2:CreateNetworkInterface",
-            "ec2:DescribeDhcpOptions",
-            "ec2:DescribeNetworkInterfaces",
-            "ec2:DeleteNetworkInterface",
-            "ec2:DescribeSubnets",
-            "ec2:DescribeSecurityGroups",
-            "ec2:DescribeVpcs",
-            "ssm:GetParameters",
-            "logs:PutLogEvents",
-            "logs:CreateLogStream",
-            "logs:CreateLogGroup",
-            "ecr:UploadLayerPart",
-            "ecr:PutImage",
-            "ecr:InitiateLayerUpload",
-            "ecr:GetAuthorizationToken",
-            "ecr:CompleteLayerUpload",
-            "ecr:BatchCheckLayerAvailability"
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:PutRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:GetRole",
+        "iam:GetRolePolicy",
+        "iam:PassRole",
+        "iam:ListInstanceProfilesForRole",
+        "iam:ListRolePolicies"
+      ],
+      "Resource": "arn:aws:iam::*:role/*"
+    },
+    {
+      "Action": "iam:CreateServiceLinkedRole",
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName":"rds.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elasticloadbalancing:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rds:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect":"Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:*",
+        "ecs:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:*"       
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:*"
+      ],
+      "Resource": "arn:aws:secretsmanager:${local.region}:*:secret:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameters"
+      ],
+      "Resource": "arn:aws:ssm:${local.region}:*:parameter*"
+    },
+    {
+      "Effect": "Allow",
+      "Action" : [
+        "dynamodb:*" 
+      ],
+      "Resource": "*" 
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+          "elasticache:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateSecurityGroup",
+        "ec2:DeleteSecurityGroup",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeDhcpOptions",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DescribeTags",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcs"
       ],
       "Resource": "*"
     },
@@ -68,17 +164,15 @@ resource "aws_iam_role_policy" "codebuild_policy" {
       ],
       "Resource": "arn:aws:ec2:${local.region}:*:network-interface/*",
       "Condition": {
-        "StringEquals": {
-          "ec2:AuthorizedService": "codebuild.amazonaws.com"
-        },
-        "ArnEquals": {
+        "StringLike": {
           "ec2:Subnet": [
-            "arn:aws:ec2:${local.region}:subnet/*"
-          ]
+            "arn:aws:ec2:${local.region}:*:subnet/*"
+          ],
+          "ec2:AuthorizedService": "codebuild.amazonaws.com"
         }
       }
     }
   ]
 }
 POLICY
-}
+  }
