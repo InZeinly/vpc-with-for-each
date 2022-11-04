@@ -1,6 +1,5 @@
 environment = "testenv"
 app_name = "testapp"
-aws_profile = "default"
 aws_account = "152617774363"
 aws_region = "eu-central-1"
 image_tag = "0.0.1"

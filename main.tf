@@ -29,6 +29,7 @@ module "ecs" {
   private_subnet_cidr = module.vpc.private_subnet_id
   alb_listener = module.alb.alb_listener
   iam_role = module.ecs.iam_role
+  app_count = var.app_count
 }
 
 module "s3_bucket" {
@@ -37,8 +38,6 @@ module "s3_bucket" {
 
 module "codebuild" {
   source = "./modules/codebuild"
-    environment = testenv
-    app_name = testapp
     github_oauth_token = var.oauth
     repo_url = var.repo_url
     git_trigger_event = var.git_trigger_event

@@ -8,3 +8,12 @@ variable "oauth" {}
 variable "repo_url" {}
 
 variable "COMMIT_MESSAGE" {}
+
+variable "git_trigger_event" {
+    type = string
+    default = "PUSH"
+}
+
+variable "app_count" {
+    default = 1
+}
