@@ -5,3 +5,5 @@ secrets.hcl
 secret.tfvars
 secret.tfvars
 secret.tfvars
+./secret.tfvars
+secret.tfvars
