@@ -18,3 +18,5 @@ variable "app_count" {
   description = "Number of docker containers to run"
   default     = 1
 }
+
+variable "aws_alb_target_group" {}

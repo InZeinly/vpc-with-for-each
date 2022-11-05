@@ -87,6 +87,11 @@ resource "aws_ecs_service" "ecs" {
       subnets = var.private_subnet_cidr
       assign_public_ip = true
     }
+    # added for load balancer test
+    load_balancer {
+      target_group_arn = var.aws_alb_target_group.id
+    }
+
     depends_on = [
       var.alb_listener, var.iam_role
     ]
