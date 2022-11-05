@@ -1,5 +1,5 @@
 output "alb_listener" {
-  value = aws_lb_listener.http_listener.id
+  value = aws_alb_listener.http_listener.id
 }
 
 output "alb_dns" {
@@ -7,5 +7,5 @@ output "alb_dns" {
 }
 
 output "aws_alb_target_group" {
-  value = aws_lb_target_group.app.id
+  value = aws_alb_target_group.app.id
 }
