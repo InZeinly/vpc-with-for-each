@@ -19,4 +19,6 @@ variable "app_count" {
   default     = 1
 }
 
-variable "aws_alb_target_group" {}
+variable "aws_alb_target_group" {
+    default = aws_alb_target_group.id
+}
