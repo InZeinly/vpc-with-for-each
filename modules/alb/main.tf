@@ -36,7 +36,5 @@ resource "aws_lb_listener" "http_listener" {
   default_action {
     type = "forward"
     target_group_arn = aws_lb_target_group.app.arn
-    container_name = "lbname-app"
-    container_port = "80"
   }
 }

@@ -90,9 +90,11 @@ resource "aws_ecs_service" "ecs" {
     # added for load balancer test
     load_balancer {
       target_group_arn = var.aws_alb_target_group.id
+      container_name = "testlb-app"
+      container_port = "80"
     }
 
     depends_on = [
-      var.alb_listener, var.iam_role
+      var.alb_listener , var.iam_role
     ]
 }
