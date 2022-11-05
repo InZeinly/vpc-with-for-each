@@ -31,7 +31,7 @@ module "ecs" {
   iam_role = module.ecs.iam_role
   image_tag = var.image_tag
   app_name = "testapp"
-  app_count = var.app_count
+  app_count = 1
 }
 
 module "s3_bucket" {
