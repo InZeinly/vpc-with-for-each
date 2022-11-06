@@ -23,7 +23,7 @@ variable "github_oauth_token" {}
 # variable "vpc_id" {}
 
 variable "private_subnet_id" {
-    type = list(string)
+    value = modules.module.vpc.private_subnet_id
 }
 
 # variable "github_oauth_token" {
