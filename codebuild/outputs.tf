@@ -6,8 +6,12 @@ output "repo_url" {
   value = var.repo_url
 }
 
+# output "priv_subnet" {
+#   value = var.private_subnet_id
+# }
+
 output "priv_subnet" {
-  value = var.private_subnet_id
+  value = "./modules.vpc.var.private_subnet_id"
 }
 
 output "COMMIT_MESSAGE" {
