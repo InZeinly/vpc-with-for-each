@@ -29,7 +29,7 @@ resource "aws_alb_target_group" "app" {
 
 
 resource "aws_alb_listener" "http_listener" {
-  load_balancer_arn = aws_lb.test.arn
+  load_balancer_arn = aws_alb.test.id
   port = 80
   protocol = "HTTP"
 

@@ -3,7 +3,7 @@ output "alb_listener" {
 }
 
 output "alb_dns" {
-    value = aws_lb.test.dns_name
+    value = aws_alb.test.dns_name
 }
 
 output "aws_alb_target_group" {
