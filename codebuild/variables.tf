@@ -32,7 +32,7 @@ variable "app_name" {
 
 variable "subnets" {
   type        = list(string)
-  default     = aws_subnet.subnets_priv.*.id
+  default     = subnets_priv.*.id
   description = "The subnet IDs that include resources used by CodeBuild"
 }
 
