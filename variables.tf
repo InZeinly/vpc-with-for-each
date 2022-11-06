@@ -22,8 +22,8 @@ variable "github_oauth_token" {}
 
 # variable "vpc_id" {}
 
-variable "private_subnet_id" {
-}
+# variable "private_subnet_id" {
+# }
 
 # variable "github_oauth_token" {
 #     default = 
