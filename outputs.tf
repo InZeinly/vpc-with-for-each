@@ -10,6 +10,8 @@ output "app_count" {
   value = var.app_count
 }
 
+
+
 # output "private_subnet_id" {
 #   value = values(aws_subnet.subnets_priv).*.id
 # }
