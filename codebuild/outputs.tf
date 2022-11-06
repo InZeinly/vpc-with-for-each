@@ -11,9 +11,11 @@ output "repo_url" {
 # }
 
 
-output "priv_subnet" {
-  value = values(aws_subnet.subnets_pub).*.id
-}
+# output "priv_subnet" {
+#   value = values(aws_subnet.subnets_pub).*.id
+# }
+
+
 
 output "COMMIT_MESSAGE" {
   value = var.COMMIT_MESSAGE
