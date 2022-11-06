@@ -31,13 +31,13 @@ phases:
       - make build
       - echo "Build complete"
 
-      - cd "${CODEBUILD_SRC_DIR}"
+      - cd "${CODEBUILD_SRC_DIR}/modules"
       - terraform init 
       # --var-file="./project/config/testenv.tfvars"
-      - terraform plan --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false -out plan.out
+      # - terraform plan --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false -out plan.out
       - terraform apply -target=module.ecs -auto-approve -no-color -input=false plan.out
-      #- terraform plan -target=module.ecs --var-file="project./config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false -out plan.out
-      #- terraform apply -auto-approve -no-color -input=false plan.out
+      - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false -out plan.out
+      - terraform apply -auto-approve -no-color -input=false plan.out
 
   post_build:
     commands:
