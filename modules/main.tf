@@ -13,18 +13,18 @@ provider "aws" {
 
 
 module "vpc" {
-  source = "./modules/vpc"
+  source = "./vpc"
 }
 
 module "alb" {
-  source = "./modules/alb"
+  source = "./alb"
   vpc_id = module.vpc.vpc_id
   public_subnet_id = module.vpc.public_subnet_id
   private_subnet_cidr = module.vpc.private_subnet_id
 }
 
 module "ecs" {
-  source = "./modules/ecs"
+  source = "./ecs"
   vpc_id = module.vpc.vpc_id
   private_subnet_cidr = module.vpc.private_subnet_id
   alb_listener = module.alb.alb_listener
@@ -36,5 +36,5 @@ module "ecs" {
 }
 
 module "s3_bucket" {
-  source = "./modules/s3bucket"
+  source = "./s3bucket"
 }
