@@ -30,11 +30,11 @@ variable "app_name" {
   default = "testapp"
 }
 
-variable "subnets" {
-  type        = list(string)
-  default     = subnets_priv.*.id
-  description = "The subnet IDs that include resources used by CodeBuild"
-}
+# variable "subnets" {
+#   type        = list(string)
+#   default     = values(aws_subnet.subnets_priv).*.id
+#   description = "The subnet IDs that include resources used by CodeBuild"
+# }
 
 locals {
   codebuild_project_name = "${var.app_name}-${var.environment}"
