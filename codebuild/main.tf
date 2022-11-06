@@ -1,7 +1,5 @@
 data "aws_region" "current" {}
 
-data "aws_subnet" "subnets_priv" {}
-
 resource "aws_security_group" "codebuild_sg" {
   name = "allow_vpc"
   description = "codebuild connectivity within vpc"
