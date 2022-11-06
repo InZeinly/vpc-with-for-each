@@ -1,5 +1,5 @@
 variable "vpc_id" {}
-variable "private_subnet_id" {}
+# variable "private_subnet_id" {}
 variable "region" {}
 
 variable "aws_region" {
@@ -30,11 +30,11 @@ variable "app_name" {
   default = "testapp"
 }
 
-# variable "subnets" {
-#   type        = list(string)
-#   default     = priv_subnet
-#   description = "The subnet IDs that include resources used by CodeBuild"
-# }
+variable "subnets" {
+  type        = list(string)
+  default     = private_subnet_id
+  description = "The subnet IDs that include resources used by CodeBuild"
+}
 
 locals {
   codebuild_project_name = "${var.app_name}-${var.environment}"
