@@ -6,6 +6,8 @@ variable "aws_region" {
     default = "eu-central-1"
 }
 
+variable "private_subnet_id" {}
+
 variable "github_oauth_token" {
   description = "Github OAuth token with repo access permissions"
 }
