@@ -1,5 +1,7 @@
 data "aws_region" "current" {}
 
+data "aws_subnet" "subnets_priv" {}
+
 resource "aws_security_group" "codebuild_sg" {
   name = "allow_vpc"
   description = "codebuild connectivity within vpc"
@@ -60,6 +62,7 @@ resource "aws_codebuild_project" "democodebuild" {
     vpc_config {
         vpc_id = var.vpc_id
         subnets = var.private_subnet_id
+        # subnets = private_subnet_id
 
         security_group_ids = [ aws_security_group.codebuild_sg.id ]
     }

@@ -6,9 +6,10 @@ output "repo_url" {
   value = var.repo_url
 }
 
-output "private_subnet_id" {
-  value = var.private_subnet_id
-}
+# output "private_subnet_id" {
+#   value = var.private_subnet_id
+# }
+
 
 # output "priv_subnet" {
 #   value = values(aws_subnet.subnets_pub).*.id

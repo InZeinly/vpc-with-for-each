@@ -39,13 +39,14 @@ provider "aws" {
 #   source = "./modules/s3bucket"
 # }
 
+
+
 module "codebuild" {
   source = "./codebuild"
   aws_region = var.region
   region = var.region
   vpc_id = "./modules.vpc.vpc_id"
-  # private_subnet_id = "./modules.vpc.private_subnet_id"
-  private_subnet_id = module.vpc.private_subnet_id
+  private_subnet_id = "./modules.vpc.private_subnet_id"
     github_oauth_token = var.github_oauth_token
     repo_url = var.repo_url
     # git_trigger_event = var.git_trigger_event
