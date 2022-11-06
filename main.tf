@@ -43,7 +43,7 @@ module "codebuild" {
   source = "./codebuild"
   aws_region = var.region
   region = var.region
-  vpc_id = module.vpc.vpc_id
+  vpc_id = "./modules.vpc.vpc_id"
   private_subnet_id = module.vpc.private_subnet_id
     github_oauth_token = var.github_oauth_token
     repo_url = var.repo_url
