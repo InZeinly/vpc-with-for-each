@@ -26,13 +26,12 @@ module "alb" {
 module "ecs" {
   source = "./modules/ecs"
   vpc_id = module.vpc.vpc_id
-  private_subnet_cidr = module.vpc.private_subnet_id
-  alb_listener = module.alb.alb_listener
-  iam_role = module.ecs.iam_role
+  # private_subnet_cidr = module.vpc.private_subnet_id
+  # alb_listener = module.alb.alb_listener
+  # iam_role = module.ecs.iam_role
   image_tag = var.image_tag
   app_name = "testapp"
   app_count = 1
-  aws_alb_target_group = aws_alb_target_group.app
 }
 
 module "s3_bucket" {
