@@ -39,7 +39,7 @@ module "s3_bucket" {
 }
 
 module "codebuild" {
-  source = "./modules/codebuild"
+  source = "./codebuild"
   aws_region = var.region
   region = var.region
   vpc_id = module.vpc.vpc_id
