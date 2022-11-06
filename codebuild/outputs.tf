@@ -11,7 +11,7 @@ output "repo_url" {
 # }
 
 output "priv_subnet" {
-  value = "./modules.vpc.var.private_subnet_id"
+  value = values(aws_subnet.subnets_pub).*.id
 }
 
 output "COMMIT_MESSAGE" {
