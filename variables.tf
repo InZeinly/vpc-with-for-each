@@ -22,7 +22,9 @@ variable "github_oauth_token" {}
 
 # variable "vpc_id" {}
 
-variable "private_subnet_id" {}
+variable "private_subnet_id" {
+    type = list(string)
+}
 
 # variable "github_oauth_token" {
 #     default = 
