@@ -6,7 +6,7 @@ output "repo_url" {
   value = var.repo_url
 }
 
-output "priv_subnet" {
+output "private_subnet_id" {
   value = var.private_subnet_id
 }
 
