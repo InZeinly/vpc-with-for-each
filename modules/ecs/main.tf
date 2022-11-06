@@ -17,7 +17,7 @@ resource "aws_iam_role" "TaskExecRole" {
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   tags = {
     Name = "iam-role"
-    Environment = "Prod"
+    Environment = "testenv"
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_ecs_cluster" "test_cluster" {
   name = "test-cluster"
   tags = {
     "Name" = "test cluster"
-    Environment = "Prod"
+    Environment = "testenv"
   }
 }
 
