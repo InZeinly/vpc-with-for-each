@@ -30,6 +30,8 @@ variable "app_name" {
   default = "testapp"
 }
 
+variable "branch_pattern" {}
+
 # variable "subnets" {
 #   type        = list(string)
 #   default     = priv_subnet
