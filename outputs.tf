@@ -9,3 +9,7 @@ output "repo_url" {
 output "app_count" {
   value = var.app_count
 }
+
+output "branch_pattern" {
+  value = var.branch_pattern
+}
