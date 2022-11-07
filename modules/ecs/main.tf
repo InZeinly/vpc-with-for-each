@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "test_repo" {
-  name                 = "testapp-testenvcodebuild123125123"
+  name                 = "testapp-testenv"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
