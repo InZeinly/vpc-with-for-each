@@ -31,3 +31,8 @@ variable "github_oauth_token" {}
 variable "image_tag" {
     default = "0.0.1"
 }
+
+variable "branch_pattern" {
+    type = string
+    default = ""
+}
