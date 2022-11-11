@@ -5,7 +5,7 @@ resource "aws_lb" "test" {
   subnets = var.public_subnet_id
 
   tags = {
-    "Environment" = "Prod"
+    "Environment" = "testenv"
   }
 }
 
