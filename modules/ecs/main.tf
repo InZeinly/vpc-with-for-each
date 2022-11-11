@@ -42,10 +42,10 @@ resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
 
 resource "aws_ecs_cluster" "test_cluster" {
   name = "test-cluster"
-  tags = {
-    "Name" = "test cluster"
-    Environment = "testenv"
-  }
+  # tags = {
+  #   "Name" = "test cluster"
+  #   Environment = "testenv"
+  # }
 }
 
 resource "aws_ecs_task_definition" "task-definition" {
