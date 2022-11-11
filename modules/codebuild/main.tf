@@ -53,10 +53,11 @@ resource "aws_codebuild_project" "democodebuild" {
         buildspec = var.build_spec_file
         type = "GITHUB"
         location = var.repo_url
-        # branch = var.branch_pattern
         git_clone_depth = 1
         report_build_status = "true"
     }
+
+    source_version = "codebuild"
 
     vpc_config {
         vpc_id = var.vpc_id
