@@ -82,7 +82,7 @@ resource "aws_route_table" "RT_priv" {
     for_each = var.route-tables_priv
     content {
       cidr_block = route.value.cidr_block
-      gateway_id = aws_nat_gateway.nat.id
+      nat_gateway_id = aws_nat_gateway.nat.id
       # gateway_id = aws_internet_gateway.igw["main"].id
     }
   }
