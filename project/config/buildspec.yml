@@ -30,7 +30,7 @@ phases:
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
       - echo "Building version ${TAG}"
       - make build
-      - echo "Build is completed!Codebuild try this!"
+      - echo "Build is completed!Codebuild updated tf version"
 
       - cd "${CODEBUILD_SRC_DIR}"
       - terraform init 
