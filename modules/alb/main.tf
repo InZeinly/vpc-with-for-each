@@ -18,11 +18,11 @@ resource "aws_lb_target_group" "app" {
 
   health_check {
     enabled = true
-    interval = 30
+    interval = 20
     path = "/"
     timeout = 5
     matcher = 200
-    healthy_threshold = 10
+    healthy_threshold = 2
     unhealthy_threshold = 2
   }
 }
@@ -30,7 +30,7 @@ resource "aws_lb_target_group" "app" {
 
 resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = aws_lb.test.arn
-  port = 80
+  port = 5000
   protocol = "HTTP"
 
   default_action {
