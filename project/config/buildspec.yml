@@ -36,8 +36,11 @@ phases:
       - terraform init 
       # - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" --var-file="./secret.tfvars" -var="image_tag=${TAG}" -no-color -input=false -out plan.out
       # - terraform apply -auto-approve -no-color -input=false plan.out
-      - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false -out plan.out
-      - terraform apply -auto-approve -no-color -input=false plan.out
+      - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false #-out plan.out
+      # - terraform apply -auto-approve -no-color -input=false plan.out
+      - terraform apply -target=module.vpc --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
+      - terraform apply -target=module.alb --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
+      - terraform apply -target=module.ecs --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
 
   post_build:
     commands:
