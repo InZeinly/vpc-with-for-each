@@ -35,8 +35,8 @@ phases:
       - cd "${CODEBUILD_SRC_DIR}"
       # - terraform init 
       # - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false #-out plan.out
-      - terraform plan -target=module.vpc --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false
-      - terraform plan -target=module.alb --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false
+      - terraform plan -target=module.vpc --var-file=./project/config/testenv.tfvars -no-color -input=false
+      - terraform plan -target=module.alb --var-file=./project/config/testenv.tfvars -no-color -input=false
       - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false
       - terraform apply --var-file="./project/config/testenv.tfvars" -auto-approve -no-color -input=false 
       # - terraform apply -target=module.vpc --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
