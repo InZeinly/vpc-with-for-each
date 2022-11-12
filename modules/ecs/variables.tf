@@ -10,6 +10,10 @@ variable "image_tag" {
     default = "0.0.01"
 }
 
+variable "env" {
+  default = "testenv"
+}
+
 variable "app_name" {
   default = "testapp"
 }

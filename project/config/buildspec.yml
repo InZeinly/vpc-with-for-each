@@ -18,7 +18,7 @@ phases:
       - export REPO_NAME="${REGISTRY_ID}.dkr.ecr.${REPOSITORY_REGION}.amazonaws.com/${APP_NAME}-${ENV}"
       - echo "Getting existing tag"
       - pip install jq
-      - export SERVICE_ARN=$(aws ecs list-services --cluster test-cluster | jq -r .serviceArns[])
+      - export SERVICE_ARN=$(aws ecs list-services --cluster ${APP_NAME}-${ENV}-cluster | jq -r .serviceArns[])
       - export TASKDEF_ARN=$(aws ecs describe-services --cluster test-cluster --service ${SERVICE_ARN} | jq -r .services[].taskDefinition)
       - export EXISTING_TAG=$(aws ecs describe-task-definition --task-definition ${TASKDEF_ARN} | jq -r .taskDefinition.containerDefinitions[].image | tr ':' ' ' | awk '{print $2}')
       - echo "Current version is ${EXISTING_TAG}"
@@ -33,7 +33,7 @@ phases:
       - echo "Build is completed! Added ecs policy"
 
       - cd "${CODEBUILD_SRC_DIR}"
-      - terraform init 
+      - terraform init -target=module.vpc -target=module.alb -target=module.ecs 
       # - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false #-out plan.out
       - terraform plan -target=module.vpc --var-file=./project/config/testenv.tfvars -no-color -input=false
       - terraform plan -target=module.alb --var-file=./project/config/testenv.tfvars -no-color -input=false

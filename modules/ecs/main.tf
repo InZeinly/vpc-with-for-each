@@ -1,3 +1,5 @@
+## ECR Repository
+
 resource "aws_ecr_repository" "test_repo" {
   name                 = "testapp-testenv"
   image_tag_mutability = "MUTABLE"
@@ -11,6 +13,37 @@ resource "aws_ecr_repository" "test_repo" {
   #   Environment = "Prod"
   # }
 }
+
+# added 12.11
+
+resource "aws_ecr_repository_policy" "test_repo" {
+  repository = aws_ecr_repository.test_repo.name
+  policy     = <<EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+      {
+        "Sid": "adds full ecr access to the demo repository",
+        "Effect": "Allow",
+        "Principal": "*",
+        "Action": [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:BatchGetImage",
+          "ecr:CompleteLayerUpload",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetLifecyclePolicy",
+          "ecr:InitiateLayerUpload",
+          "ecr:PutImage",
+          "ecr:UploadLayerPart"
+        ]
+      }
+    ]
+}
+EOF
+}
+
+
+# Roles and policy 
 
 # added 12.11
 resource "aws_iam_role" "ecs_task_role" {
@@ -136,8 +169,10 @@ resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
+
+
 resource "aws_ecs_cluster" "test_cluster" {
-  name = "test-cluster"
+  name = "${var.app_name}-${var.env}-cluster"
   # tags = {
   #   "Name" = "test cluster"
   #   Environment = "testenv"
@@ -153,7 +188,7 @@ resource "aws_ecs_task_definition" "task-definition" {
   memory = "512"
   container_definitions = jsonencode([
     {
-        name = "first"
+        name = var.app_name
         image = "nginx:latest"
         essential = true
         portMappings = [
@@ -167,7 +202,7 @@ resource "aws_ecs_task_definition" "task-definition" {
 }
 
 resource "aws_ecs_service" "ecs" {
-    name = "test-ecs"
+    name = "test-ecs-service"
     cluster = aws_ecs_cluster.test_cluster.id
     task_definition = aws_ecs_task_definition.task-definition.id
     launch_type = "FARGATE"
@@ -178,6 +213,15 @@ resource "aws_ecs_service" "ecs" {
       subnets = var.private_subnet_cidr
       assign_public_ip = true
     }
+
+    # adding lb 12.11
+    load_balancer {
+      target_group_arn = aws_alb_target_group.app.id
+      container_name = var.app_name
+      containerPort = 80
+    }
+
+
     depends_on = [
       var.alb_listener, var.iam_role
     ]

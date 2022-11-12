@@ -1,5 +1,5 @@
-resource "aws_lb" "test" {
-  name = "test-lb"
+resource "aws_alb" "test" {
+  name = "test-alb"
   internal = false
   load_balancer_type = "application"
   subnets = var.public_subnet_id
@@ -11,7 +11,7 @@ resource "aws_lb" "test" {
 }
 
 
-resource "aws_lb_target_group" "app" {
+resource "aws_alb_target_group" "app" {
   name = "targetGroup"
   port = 80
   protocol = "HTTP"
@@ -29,13 +29,13 @@ resource "aws_lb_target_group" "app" {
 }
 
 
-resource "aws_lb_listener" "http_listener" {
-  load_balancer_arn = aws_lb.test.arn
+resource "aws_alb_listener" "http_listener" {
+  load_balancer_arn = aws_alb.test.arn
   port = 5000
   protocol = "HTTP"
 
   default_action {
     type = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
+    target_group_arn = aws_alb_target_group.app.arn
   }
 }
