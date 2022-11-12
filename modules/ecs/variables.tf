@@ -1,4 +1,4 @@
-variable "private_subnet_cidr" {}
+variable "private_subnet_id" {}
 
 variable "alb_listener" {}
 
