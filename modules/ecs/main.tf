@@ -12,6 +12,26 @@ resource "aws_ecr_repository" "test_repo" {
   # }
 }
 
+# added 12.11
+resource "aws_iam_role" "ecs_task_role" {
+  name               = "testapp-testenv-taskrole"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_iam_role" "TaskExecRole" {
   name = "exec-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
@@ -19,6 +39,76 @@ resource "aws_iam_role" "TaskExecRole" {
     Name = "iam-role"
     Environment = "testenv"
   }
+}
+
+data "template_file" "ecs_service_policy" {
+  template = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:DeregisterContainerInstance",
+        "ecs:DiscoverPollEndpoint",
+        "ecs:Poll",
+        "ecs:RegisterContainerInstance",
+        "ecs:StartTelemetrySession",
+        "ecs:Submit*",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:Describe",
+        "ec2:DescribeInstances"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath"
+      ],
+      "Resource": [
+        "arn:aws:ssm:*:*:parameter/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:GetSecretValue"
+      ],
+      "Resource": [
+        "arn:aws:secretsmanager:*:*:secret:*"
+      ]
+    },
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Action": [
+         "kms:ListKeys",
+         "kms:ListAliases",
+         "kms:Describe*",
+         "kms:Decrypt"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {
@@ -33,6 +123,12 @@ data "aws_iam_policy_document" "assume_role_policy" {
         identifiers = ["ecs-tasks.amazonaws.com"]
       }
     }
+}
+
+resource "aws_iam_role" "ecs_task_exec_role" {
+  name_prefix = "ecs_iam_role_policy"
+  role = aws_iam_role.TaskExecRole.id
+  policy = data.template_file.ecs_service_policy.rendered
 }
 
 resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
