@@ -37,7 +37,7 @@ module "ecs" {
 
 module "ecr" {
   source = "./modules/ecr"
-  aws_region = var.aws_region
+  aws_region = var.region
 }
 
 module "s3_bucket" {
