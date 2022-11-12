@@ -33,7 +33,7 @@ phases:
       - echo "Build is completed! Added ecs policy"
 
       - cd "${CODEBUILD_SRC_DIR}"
-      # - terraform init 
+      - terraform init 
       # - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false #-out plan.out
       - terraform plan -target=module.vpc --var-file=./project/config/testenv.tfvars -no-color -input=false
       - terraform plan -target=module.alb --var-file=./project/config/testenv.tfvars -no-color -input=false
