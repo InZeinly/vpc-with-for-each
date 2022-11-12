@@ -168,19 +168,14 @@ resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
-
-
 resource "aws_ecs_cluster" "test_cluster" {
   name = "${var.app_name}-${var.env}-cluster"
-  # tags = {
-  #   "Name" = "test cluster"
-  #   Environment = "testenv"
-  # }
 }
 
 resource "aws_ecs_task_definition" "task-definition" {
-  family = "some-name"
+  family = "${var.app_name}-${var.env}-task"
   execution_role_arn = aws_iam_role.TaskExecRole.arn
+  task_role_arn = aws_iam_role.ecs_task_role.arn
   network_mode = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu = "1024"
@@ -192,9 +187,15 @@ resource "aws_ecs_task_definition" "task-definition" {
         essential = true
         portMappings = [
             {
-                containerPort = 80
-                hostPort = 80
+                containerPort = 5000
+                hostPort = 5000
             }
+        ],
+        environment = [
+          {
+                name = "VERSION"
+                value = var.image_tag
+          }
         ]
     }
   ])

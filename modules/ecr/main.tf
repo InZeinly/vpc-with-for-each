@@ -5,11 +5,6 @@ resource "aws_ecr_repository" "test_repo" {
   image_scanning_configuration {
     scan_on_push = true
   }
-
-  # tags = {
-  #   Name = "ecr repo"
-  #   Environment = "Prod"
-  # }
 }
 
 # added 12.11
