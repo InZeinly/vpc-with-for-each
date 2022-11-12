@@ -3,8 +3,6 @@ variable "region" {
     default = "eu-central-1"
 }
 
-# variable "oauth" {}
-
 variable "repo_url" {}
 
 variable "COMMIT_MESSAGE" {}
@@ -21,14 +19,6 @@ variable "app_count" {
 variable "github_oauth_token" {
     default = ""
 }
-
-# variable "vpc_id" {}
-
-# variable "private_subnet_id" {}
-
-# variable "github_oauth_token" {
-#     default = 
-# }
 
 variable "image_tag" {
     default = "0.0.1"

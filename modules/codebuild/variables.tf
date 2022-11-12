@@ -15,7 +15,7 @@ variable "build_spec_file" {
 }
 
 variable "repo_url" {
-  default = "https://github.com/InZeinly/vpc-with-for-each/tree/main/project"
+  default = "https://github.com/InZeinly/vpc-with-for-each"
 }
 
 variable "COMMIT_MESSAGE" {
