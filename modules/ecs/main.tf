@@ -67,10 +67,30 @@ EOF
 resource "aws_iam_role" "TaskExecRole" {
   name = "exec-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
-  tags = {
-    Name = "iam-role"
-    Environment = "testenv"
-  }
+  # tags = {
+  #   Name = "iam-role"
+  #   Environment = "testenv"
+  # }
+}
+
+resource "aws_iam_role_policy" "ecs_task_role" {
+    name   = "${var.app_name}-${var.env}-taskrole"
+  role   = aws_iam_role.ecs_task_role.id
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
 }
 
 data "template_file" "ecs_service_policy" {
@@ -163,10 +183,10 @@ resource "aws_iam_role_policy" "ecs_task_exec_role" {
   policy = data.template_file.ecs_service_policy.rendered
 }
 
-resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
-  role = aws_iam_role.TaskExecRole.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
-}
+# resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
+#   role = aws_iam_role.TaskExecRole.name
+#   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+# }
 
 resource "aws_ecs_cluster" "test_cluster" {
   name = "${var.app_name}-${var.env}-cluster"
