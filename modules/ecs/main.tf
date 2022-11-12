@@ -202,8 +202,8 @@ resource "aws_ecs_task_definition" "task-definition" {
   memory = "2048"
   container_definitions = jsonencode([
     {
-        name = var.app_name
-        image = "nginx:latest"
+        name = "${var.app_name}-${var.env}-app"
+        image = "${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
         essential = true
         portMappings = [
             {

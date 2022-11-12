@@ -24,3 +24,5 @@ variable "app_count" {
 }
 
 variable "alb_target_group" {}
+
+variable "aws_ecr_repository_url" {}
