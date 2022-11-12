@@ -216,7 +216,7 @@ resource "aws_ecs_service" "ecs" {
 
     # adding lb 12.11
     load_balancer {
-      target_group_arn = module.alb_target_group.app.id
+      target_group_arn = var.alb_target_group.app
       container_name = var.app_name
       container_port = 80
     }
