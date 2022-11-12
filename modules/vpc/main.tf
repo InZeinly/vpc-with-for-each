@@ -67,7 +67,8 @@ resource "aws_route_table" "RT_pub" {
   dynamic "route" {
     for_each = var.route-tables_pub
     content {
-      cidr_block = route.value.cidr_block
+      #cidr_block = route.value.cidr_block
+      cidr_block = var.cidr_block
       gateway_id = aws_internet_gateway.igw["main"].id
     }
   }
@@ -81,7 +82,8 @@ resource "aws_route_table" "RT_priv" {
   dynamic "route" {
     for_each = var.route-tables_priv
     content {
-      cidr_block = route.value.cidr_block
+      #cidr_block = route.value.cidr_block
+      cidr_block = var.cidr_block
       nat_gateway_id = aws_nat_gateway.nat.id
       # gateway_id = aws_internet_gateway.igw["main"].id
     }
