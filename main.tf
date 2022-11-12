@@ -35,6 +35,10 @@ module "ecs" {
   alb_target_group = module.alb.alb_target_group
 }
 
+module "ecr" {
+  source = "./modules/ecr"
+}
+
 module "s3_bucket" {
   source = "./modules/s3bucket"
 }
