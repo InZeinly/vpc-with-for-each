@@ -30,7 +30,7 @@ phases:
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
       - echo "Building version ${TAG}"
       - make build
-      - echo "Build is completed! Added ecs policy"
+      - echo "Build is completed! Check with s3 bucket"
 
       - cd "${CODEBUILD_SRC_DIR}"
       - terraform init #-target=module.vpc -target=module.alb -target=module.ecs 
@@ -38,7 +38,7 @@ phases:
       - terraform plan -target=module.vpc --var-file=./project/config/testenv.tfvars -var="image_tag=${TAG}" -no-color -input=false -lock=false
       - terraform plan -target=module.alb --var-file=./project/config/testenv.tfvars -var="image_tag=${TAG}" -no-color -input=false -lock=false
       - terraform plan -target=module.ecs --var-file="./project/config/testenv.tfvars" -var="image_tag=${TAG}" -no-color -input=false -lock=false
-      - terraform apply --var-file="./project/config/testenv.tfvars" -auto-approve -no-color -input=false 
+      - terraform apply --var-file="./project/config/testenv.tfvars" -auto-approve -no-color -input=false -lock=false
       # - terraform apply -target=module.vpc --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
       # - terraform apply -target=module.alb --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
       # - terraform apply -target=module.ecs --var-file=./project/config/testenv.tfvars -auto-approve -no-color -input=false #plan.out
