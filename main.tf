@@ -32,7 +32,7 @@ module "ecs" {
   image_tag = var.image_tag
   app_name = "testapp"
   app_count = var.app_count
-  alb_target_group = var.alb_target_group.id
+  alb_target_group = var.aws_alb_target_group.id
 }
 
 module "s3_bucket" {
