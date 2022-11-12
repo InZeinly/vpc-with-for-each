@@ -125,7 +125,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     }
 }
 
-resource "aws_iam_role" "ecs_task_exec_role" {
+resource "aws_iam_role_policy" "ecs_task_exec_role" {
   name_prefix = "ecs_iam_role_policy"
   role = aws_iam_role.TaskExecRole.id
   policy = data.template_file.ecs_service_policy.rendered
