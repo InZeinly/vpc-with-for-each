@@ -210,7 +210,7 @@ resource "aws_ecs_service" "ecs" {
     desired_count = 1
     force_new_deployment = true
     network_configuration {
-      subnets = var.private_subnet_cidr
+      subnets = var.private_subnet_id
       assign_public_ip = true
     }
 
