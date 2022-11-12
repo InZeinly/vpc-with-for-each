@@ -204,7 +204,7 @@ resource "aws_ecs_task_definition" "task-definition" {
 resource "aws_ecs_service" "ecs" {
     name = "test-ecs-service"
     cluster = aws_ecs_cluster.test_cluster.id
-    task_definition = aws_ecs_task_definition.task-definition.arm
+    task_definition = aws_ecs_task_definition.task-definition.arn
     launch_type = "FARGATE"
     scheduling_strategy = "REPLICA"
     desired_count = 1
