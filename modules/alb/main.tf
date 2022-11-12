@@ -2,7 +2,8 @@ resource "aws_lb" "test" {
   name = "test-lb"
   internal = false
   load_balancer_type = "application"
-  subnets = var.public_subnet_id
+  # subnets = var.public_subnet_id
+  subnets = values(aws_subnet.subnets_pub).*.id
 
   tags = {
     "Environment" = "testenv"
