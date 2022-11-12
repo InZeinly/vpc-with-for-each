@@ -29,4 +29,6 @@ variable "branch_pattern" {
     default = ""
 }
 
-variable "alb_target_group" {}
+variable "alb_target_group" {
+    default = ""
+}
