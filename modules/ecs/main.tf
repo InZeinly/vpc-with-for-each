@@ -229,7 +229,7 @@ resource "aws_ecs_service" "ecs" {
 
 resource "aws_security_group" "task_sg" {
   name = "task_sg"
-  vpc_id = aws_vpc.main.id
+  vpc_id = var.vpc_id
 
     ingress {
     protocol    = "tcp"
