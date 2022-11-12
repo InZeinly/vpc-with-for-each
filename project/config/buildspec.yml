@@ -19,7 +19,7 @@ phases:
       - echo "Getting existing tag"
       - pip install jq
       - export SERVICE_ARN=$(aws ecs list-services --cluster ${APP_NAME}-${ENV}-cluster | jq -r .serviceArns[])
-      - export TASKDEF_ARN=$(aws ecs describe-services --cluster test-cluster --service ${SERVICE_ARN} | jq -r .services[].taskDefinition)
+      - export TASKDEF_ARN=$(aws ecs describe-services --cluster ${APP_NAME}-${ENV}-cluster --service ${SERVICE_ARN} | jq -r .services[].taskDefinition)
       - export EXISTING_TAG=$(aws ecs describe-task-definition --task-definition ${TASKDEF_ARN} | jq -r .taskDefinition.containerDefinitions[].image | tr ':' ' ' | awk '{print $2}')
       - echo "Current version is ${EXISTING_TAG}"
       
@@ -49,8 +49,8 @@ phases:
           NEWTAG=''
           while [ "${NEWTAG}" != "${TAG}" ]; 
           do 
-            NEW_ARN=$(aws ecs list-services --cluster test-cluster | jq -r .serviceArns[])
-            NEW_TASKDEF=$(aws ecs describe-services --cluster test-cluster --service ${NEW_ARN} | jq -r .services[].taskDefinition)
+            NEW_ARN=$(aws ecs list-services --cluster ${APP_NAME}-${ENV}-cluster | jq -r .serviceArns[])
+            NEW_TASKDEF=$(aws ecs describe-services --cluster ${APP_NAME}-${ENV}-cluster --service ${NEW_ARN} | jq -r .services[].taskDefinition)
             NEWTAG=$(aws ecs describe-task-definition --task-definition ${NEW_TASKDEF} | jq -r .taskDefinition.containerDefinitions[].image | tr ':' ' ' | awk '{print $2}')
             echo "Waiting until new image started... Tag: ${TAG} New tag: ${NEWTAG}"
             if [ "${NEWTAG}" != ${TAG} ]; then

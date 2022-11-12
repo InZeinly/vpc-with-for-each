@@ -184,8 +184,8 @@ resource "aws_ecs_task_definition" "task-definition" {
   execution_role_arn = aws_iam_role.TaskExecRole.arn
   network_mode = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu = "256"
-  memory = "512"
+  cpu = "1024"
+  memory = "2048"
   container_definitions = jsonencode([
     {
         name = var.app_name
@@ -204,7 +204,7 @@ resource "aws_ecs_task_definition" "task-definition" {
 resource "aws_ecs_service" "ecs" {
     name = "test-ecs-service"
     cluster = aws_ecs_cluster.test_cluster.id
-    task_definition = aws_ecs_task_definition.task-definition.id
+    task_definition = aws_ecs_task_definition.task-definition.arm
     launch_type = "FARGATE"
     scheduling_strategy = "REPLICA"
     desired_count = 1
