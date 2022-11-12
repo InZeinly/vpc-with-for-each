@@ -226,3 +226,22 @@ resource "aws_ecs_service" "ecs" {
       var.alb_listener, var.iam_role
     ]
 }
+
+resource "aws_security_group" "task_sg" {
+  name = "task_sg"
+  vpc_id = aws_vpc.main.id
+
+    ingress {
+    protocol    = "tcp"
+    from_port   = 5000
+    to_port     = 5000
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
