@@ -20,14 +20,14 @@ resource "aws_s3_bucket_versioning" "versioning_test" {
 
 # Dynamodb terraform state lock
 
-resource "aws_dynamodb_table" "terraform_state_lock" {
-  name = "terraform-state-lock"
-  hash_key = "LockID"
-  read_capacity = 10
-  write_capacity = 10
+# resource "aws_dynamodb_table" "terraform_state_lock" {
+#   name = "terraform-state-lock"
+#   hash_key = "LockID"
+#   read_capacity = 10
+#   write_capacity = 10
  
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-}
+#   attribute {
+#     name = "LockID"
+#     type = "S"
+#   }
+# }
