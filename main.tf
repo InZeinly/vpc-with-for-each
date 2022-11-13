@@ -66,7 +66,7 @@ module "init-build" {
   bucket = var.bucket
   env    = var.env
   app_name = var.app_name
-  working_dir = var.working_dir
+  working_dir = "${path.root}/project"
   image_tag = var.image_tag
 
   depends_on = [

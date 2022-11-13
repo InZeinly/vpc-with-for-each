@@ -50,5 +50,5 @@ variable "bucket" {
 }
 
 variable "working_dir" {
-    default = "${path.root}/project"
+  type = string
 }
