@@ -59,3 +59,17 @@ module "codebuild" {
     COMMIT_MESSAGE = var.COMMIT_MESSAGE
     build_spec_file = "project/config/buildspec.yml"
 }
+
+module "init-build" {
+  source = "./modules/init-build"
+  region = var.region
+  bucket = var.bucket
+  env    = var.env
+  app_name = var.app_name
+  working_dir = var.working_dir
+  image_tag = var.image_tag
+
+  depends_on = [
+    module.ecr
+  ]
+}

@@ -44,3 +44,11 @@ variable "env" {
 variable "server_image" {
     default = "152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv"
 }
+
+variable "bucket" {
+    default = "inzeintestbucket"
+}
+
+variable "working_dir" {
+    default = "${path.root}/project"
+}
