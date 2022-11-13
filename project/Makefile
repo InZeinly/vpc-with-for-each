@@ -7,9 +7,9 @@ REPO_NAME = $(REGISTRY_ID).dkr.ecr.$(REPOSITORY_REGION).amazonaws.com/${APP_NAME
 # -f ./Dockerfile .
 .PHONY: build
 build:
-	$(MAKE) docker-login
-	docker build -t $(REPO_NAME):$(TAG) .
-	docker push $(REPO_NAME):$(TAG)
+	sudo $(MAKE) docker-login
+	sudo docker build -t $(REPO_NAME):$(TAG) .
+	sudo docker push $(REPO_NAME):$(TAG)
 
 .PHONY: docker-login
 docker-login:
