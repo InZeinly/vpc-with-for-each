@@ -4,9 +4,11 @@ variable "aws_region" {
 
 variable "app_name" {
     description = "app name"
+    default = "testapp"
 }
 
 variable "env" {
     description = "environment"
+    default = "testenv"
 }
 
