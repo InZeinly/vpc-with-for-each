@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "TaskExecRole" {
-  name = "exec-role"
+  name = "${var.app_name}-${var.env}-${TaskExecutionRole}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
 
@@ -102,7 +102,7 @@ EOF
 
 # added 12.11
 resource "aws_iam_role" "ecs_task_role" {
-  name               = "${var.app_name}-${var.env}-ecs_task_role"
+  name               = "${var.app_name}-${var.env}-TaskRole"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -121,7 +121,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "ecs_task_role" {
-    name   = "${var.app_name}-${var.env}-ecs_task_role"
+    name   = "${var.app_name}-${var.env}-TaskRole"
   role   = aws_iam_role.ecs_task_role.id
   policy = <<EOF
 {
@@ -182,7 +182,7 @@ resource "aws_ecs_task_definition" "task-definition" {
 }
 
 resource "aws_ecs_service" "ecs" {
-    name = "test-ecs-service"
+    name = "${var.app_name}-${var.env}-service"
     cluster = aws_ecs_cluster.test_cluster.id
     task_definition = aws_ecs_task_definition.task-definition.arn
     launch_type = "FARGATE"

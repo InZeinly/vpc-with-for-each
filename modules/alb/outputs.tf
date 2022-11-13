@@ -7,5 +7,5 @@ output "alb_dns" {
 }
 
 output "alb_target_group" {
-  value = aws_alb_target_group.app.arn
+  value = aws_alb_target_group.app.id
 }
