@@ -40,6 +40,4 @@ variable "aws_ecr_repository_url" {
   default = ""
 }
 
-variable "alb_sg" {
-  default = ""
-}
+variable "alb_sg" {}
