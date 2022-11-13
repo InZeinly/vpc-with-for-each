@@ -1,96 +1,33 @@
-# Creating in module ecr
-# resource "aws_ecr_repository" "test_repo" {
-#   name                 = "testapp-testenv"
-#   image_tag_mutability = "MUTABLE"
+# Roles and Policy
 
-#   image_scanning_configuration {
-#     scan_on_push = true
-#   }
+data "aws_iam_policy_document" "assume_role_policy" {
+    version = "2012-10-17"
+    statement {
+      actions = ["sts:AssumeRole"]
+      effect = "Allow"
+      sid = ""
 
-#   # tags = {
-#   #   Name = "ecr repo"
-#   #   Environment = "Prod"
-#   # }
-# }
-
-# # added 12.11
-
-# resource "aws_ecr_repository_policy" "test_repo" {
-#   repository = aws_ecr_repository.test_repo.name
-#   policy     = <<EOF
-# {
-#     "Version": "2008-10-17",
-#     "Statement": [
-#       {
-#         "Sid": "adds full ecr access to the demo repository",
-#         "Effect": "Allow",
-#         "Principal": "*",
-#         "Action": [
-#           "ecr:BatchCheckLayerAvailability",
-#           "ecr:BatchGetImage",
-#           "ecr:CompleteLayerUpload",
-#           "ecr:GetDownloadUrlForLayer",
-#           "ecr:GetLifecyclePolicy",
-#           "ecr:InitiateLayerUpload",
-#           "ecr:PutImage",
-#           "ecr:UploadLayerPart"
-#         ]
-#       }
-#     ]
-# }
-# EOF
-# }
-
-
-# Roles and policy 
-
-# added 12.11
-resource "aws_iam_role" "ecs_task_role" {
-  name               = "testapp-testenv-taskrole"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ecs-tasks.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
+      principals {
+        type = "Service"
+        identifiers = ["ecs-tasks.amazonaws.com"]
+      }
     }
-  ]
-}
-EOF
 }
 
 resource "aws_iam_role" "TaskExecRole" {
   name = "exec-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
-  # tags = {
-  #   Name = "iam-role"
-  #   Environment = "testenv"
-  # }
 }
 
-resource "aws_iam_role_policy" "ecs_task_role" {
-    name   = "${var.app_name}-${var.env}-taskrole"
-  role   = aws_iam_role.ecs_task_role.id
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:Get*",
-                "s3:List*"
-            ],
-            "Resource": "*"
-        }
-    ]
+resource "aws_iam_role_policy" "ecs_task_exec_role" {
+  name_prefix = "ecs_iam_role_policy"
+  role = aws_iam_role.TaskExecRole.id
+  policy = data.template_file.ecs_service_policy.rendered
 }
-EOF
+
+resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
+  role = aws_iam_role.TaskExecRole.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
 data "template_file" "ecs_service_policy" {
@@ -163,30 +100,47 @@ data "template_file" "ecs_service_policy" {
 EOF
 }
 
-data "aws_iam_policy_document" "assume_role_policy" {
-    version = "2012-10-17"
-    statement {
-      actions = ["sts:AssumeRole"]
-      effect = "Allow"
-      sid = ""
-
-      principals {
-        type = "Service"
-        identifiers = ["ecs-tasks.amazonaws.com"]
-      }
+# added 12.11
+resource "aws_iam_role" "ecs_task_role" {
+  name               = "${var.app_name}-${var.env}-ecs_task_role"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
     }
+  ]
+}
+EOF
 }
 
-resource "aws_iam_role_policy" "ecs_task_exec_role" {
-  name_prefix = "ecs_iam_role_policy"
-  role = aws_iam_role.TaskExecRole.id
-  policy = data.template_file.ecs_service_policy.rendered
+resource "aws_iam_role_policy" "ecs_task_role" {
+    name   = "${var.app_name}-${var.env}-ecs_task_role"
+  role   = aws_iam_role.ecs_task_role.id
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
 }
 
-# resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
-#   role = aws_iam_role.TaskExecRole.name
-#   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
-# }
+###### Resources 
 
 resource "aws_ecs_cluster" "test_cluster" {
   name = "${var.app_name}-${var.env}-cluster"
@@ -229,6 +183,7 @@ resource "aws_ecs_service" "ecs" {
     scheduling_strategy = "REPLICA"
     desired_count = 1
     force_new_deployment = true
+    
     network_configuration {
       subnets = var.private_subnet_id #var.private_subnet_cidr
       assign_public_ip = true
