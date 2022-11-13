@@ -174,7 +174,7 @@ resource "aws_ecs_task_definition" "task-definition" {
         environment = [
           {
                 name = "VERSION"
-                value = ${local.image}
+                value = "${var.app_name}${var.image_tag}"
           }
         ]
     }
