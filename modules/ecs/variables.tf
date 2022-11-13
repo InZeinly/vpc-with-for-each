@@ -7,6 +7,7 @@ variable "iam_role" {}
 variable "vpc_id" {}
 
 variable "image_tag" {
+    type = string
     default = "0.0.1"
 }
 

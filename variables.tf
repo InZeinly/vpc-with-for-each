@@ -21,6 +21,7 @@ variable "github_oauth_token" {
 }
 
 variable "image_tag" {
+    type = string
     default = "0.0.1"
 }
 
