@@ -34,9 +34,9 @@ variable "alb_target_group" {
 }
 
 variable "app_name" {
-    default = ""
+    default = "testapp"
 }
 
 variable "env" {
-    default = ""
+    default = "testenv"
 }
