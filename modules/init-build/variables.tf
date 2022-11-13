@@ -21,3 +21,7 @@ variable "bucket" {
 variable "region" {
     type = string
 }
+
+variable "aws_profile" {
+  description = "aws profile"
+}
