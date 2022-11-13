@@ -205,7 +205,8 @@ resource "aws_ecs_service" "ecs" {
 
 
     depends_on = [
-      var.alb_listener, var.iam_role
+      #var.alb_listener, var.iam_role
+      var.alb_listener, aws_iam_role_policy.ecs_task_exec_role
     ]
 }
 
@@ -218,6 +219,7 @@ resource "aws_security_group" "task_sg" {
     from_port   = 5000
     to_port     = 5000
     cidr_blocks = ["0.0.0.0/0"]
+    security_groups = var.alb_sg
   }
 
   egress {

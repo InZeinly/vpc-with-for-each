@@ -1,10 +1,18 @@
-variable "private_subnet_id" {}
+variable "private_subnet_id" {
+  default = ""
+}
 
-variable "alb_listener" {}
+variable "alb_listener" {
+  default = ""
+}
 
-variable "iam_role" {}
+variable "iam_role" {
+  default = ""
+}
 
-variable "vpc_id" {}
+variable "vpc_id" {
+  default = ""
+}
 
 variable "image_tag" {
     type = string
@@ -24,8 +32,14 @@ variable "app_count" {
   default     = 1
 }
 
-variable "alb_target_group" {}
+variable "alb_target_group" {
+  default = ""
+}
 
 variable "aws_ecr_repository_url" {
+  default = ""
+}
+
+variable "alb_sg" {
   default = ""
 }
