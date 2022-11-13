@@ -7,7 +7,7 @@ variable "iam_role" {}
 variable "vpc_id" {}
 
 variable "image_tag" {
-    default = "0.0.01"
+    default = "0.0.1"
 }
 
 variable "env" {
