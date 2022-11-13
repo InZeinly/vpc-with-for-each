@@ -48,7 +48,3 @@ variable "server_image" {
 variable "bucket" {
     default = "inzeintestbucket"
 }
-
-variable "working_dir" {
-  type = string
-}
