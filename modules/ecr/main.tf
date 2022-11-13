@@ -28,11 +28,6 @@ resource "aws_ecr_repository_policy" "test_repo" {
           "ecr:InitiateLayerUpload",
           "ecr:PutImage",
           "ecr:UploadLayerPart",
-          “ecr:GetAuthorizationToken”,
-          “ecr:GetRepositoryPolicy”,
-          “ecr:DescribeRepositories”,
-          “ecr:ListImages”,
-          “ecr:DescribeImages”
         ]
       }
     ]
