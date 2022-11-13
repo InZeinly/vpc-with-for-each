@@ -33,3 +33,10 @@ variable "alb_target_group" {
     default = ""
 }
 
+variable "app_name" {
+    default = ""
+}
+
+variable "env" {
+    default = ""
+}
