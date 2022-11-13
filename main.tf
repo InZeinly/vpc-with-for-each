@@ -84,7 +84,4 @@ module "init-build" {
   working_dir = "${path.root}/project"
   image_tag = var.image_tag
 
-  depends_on = [
-    module.ecr
-  ]
 }
