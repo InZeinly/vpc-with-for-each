@@ -14,6 +14,9 @@ provider "aws" {
 
 module "vpc" {
   source = "./modules/vpc"
+  depends_on = [
+    module.ecr, module.init-build
+  ]
 }
 
 module "alb" {
@@ -21,6 +24,10 @@ module "alb" {
   vpc_id = module.vpc.vpc_id
   public_subnet_id = module.vpc.public_subnet_id
   private_subnet_cidr = module.vpc.private_subnet_id
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 module "ecs" {
@@ -33,6 +40,10 @@ module "ecs" {
   app_name = "testapp"
   app_count = var.app_count
   alb_target_group = module.alb.alb_target_group
+
+  depends_on = [
+    module.alb , module.vpc
+  ]
 }
 
 module "ecr" {
@@ -58,6 +69,10 @@ module "codebuild" {
     # git_trigger_event = var.git_trigger_event
     COMMIT_MESSAGE = var.COMMIT_MESSAGE
     build_spec_file = "project/config/buildspec.yml"
+
+    depends_on = [
+      module.vpc, module.alb, module.ecs, module.ecr
+    ]
 }
 
 module "init-build" {
