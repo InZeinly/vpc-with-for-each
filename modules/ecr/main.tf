@@ -27,7 +27,7 @@ resource "aws_ecr_repository_policy" "test_repo" {
           "ecr:GetLifecyclePolicy",
           "ecr:InitiateLayerUpload",
           "ecr:PutImage",
-          "ecr:UploadLayerPart",
+          "ecr:UploadLayerPart"
         ]
       }
     ]
