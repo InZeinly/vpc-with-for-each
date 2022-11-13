@@ -216,8 +216,8 @@ resource "aws_security_group" "task_sg" {
 
     ingress {
     protocol    = "tcp"
-    from_port   = 5000
-    to_port     = 5000
+    from_port   = 80 #5000
+    to_port     = 80 #5000
     cidr_blocks = ["0.0.0.0/0"]
     security_groups = [var.alb_sg]
   }
