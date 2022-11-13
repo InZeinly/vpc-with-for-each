@@ -146,6 +146,10 @@ resource "aws_ecs_cluster" "test_cluster" {
   name = "${var.app_name}-${var.env}-cluster"
 }
 
+locals {
+  image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
+}
+
 resource "aws_ecs_task_definition" "task-definition" {
   family = "${var.app_name}-${var.env}-task"
   execution_role_arn = aws_iam_role.TaskExecRole.arn
@@ -157,7 +161,8 @@ resource "aws_ecs_task_definition" "task-definition" {
   container_definitions = jsonencode([
     {
         name = "${var.app_name}-${var.env}-app"
-        image =  "${local.image}" #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
+        image =  "${local.image}"
+        #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
         essential = true
         portMappings = [
             {
