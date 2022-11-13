@@ -25,10 +25,10 @@ resource "aws_iam_role_policy" "ecs_task_exec_role" {
   policy = data.template_file.ecs_service_policy.rendered
 }
 
-resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
-  role = aws_iam_role.TaskExecRole.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
-}
+# resource "aws_iam_role_policy_attachment" "TaskRolePolicy" {
+#   role = aws_iam_role.TaskExecRole.name
+#   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+# }
 
 data "template_file" "ecs_service_policy" {
   template = <<EOF
@@ -191,6 +191,7 @@ resource "aws_ecs_service" "ecs" {
     force_new_deployment = true
     
     network_configuration {
+      security_groups = [aws_security_group.task_sg.id]
       subnets = var.private_subnet_id #var.private_subnet_cidr
       assign_public_ip = true
     }
