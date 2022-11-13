@@ -157,7 +157,7 @@ resource "aws_ecs_task_definition" "task-definition" {
   container_definitions = jsonencode([
     {
         name = "${var.app_name}-${var.env}-app"
-        image =  "${image}" #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
+        image =  "${local.image}" #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
         essential = true
         portMappings = [
             {
