@@ -52,5 +52,5 @@ variable "bucket" {
 }
 
 variable "aws_profile" {
-    default = "default"
+    default = "inzein"
 }
