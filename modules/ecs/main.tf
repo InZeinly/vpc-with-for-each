@@ -146,9 +146,9 @@ resource "aws_ecs_cluster" "test_cluster" {
   name = "${var.app_name}-${var.env}-cluster"
 }
 
-# locals {
-#   image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
-# }
+locals {
+  image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
+}
 
 resource "aws_ecs_task_definition" "task-definition" {
   family = "${var.app_name}-${var.env}-task"
@@ -161,7 +161,8 @@ resource "aws_ecs_task_definition" "task-definition" {
   container_definitions = jsonencode([
     {
         name = "${var.app_name}-${var.env}-app"
-        image =  "152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv${var.image_tag}"
+        image = "${local.image}"
+        #"152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv${var.image_tag}"
         #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
         essential = true
         portMappings = [
