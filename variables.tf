@@ -27,6 +27,7 @@ variable "image_tag" {
 
 variable "branch_pattern" {
     type = string
+    default = ""
 }
 
 variable "alb_target_group" {
