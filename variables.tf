@@ -27,11 +27,10 @@ variable "image_tag" {
 
 variable "branch_pattern" {
     type = string
-    default = ""
 }
 
 variable "alb_target_group" {
-    default = ""
+    type = string
 }
 
 variable "app_name" {
@@ -56,5 +55,5 @@ variable "aws_profile" {
 }
 
 variable "alb_sg" {
-    default = ""
+    type = string
 }

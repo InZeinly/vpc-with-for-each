@@ -1,17 +1,17 @@
 variable "private_subnet_id" {
-  default = ""
+  type = string
 }
 
 variable "alb_listener" {
-  default = ""
+  type = string
 }
 
 variable "iam_role" {
-  default = ""
+  type = string
 }
 
 variable "vpc_id" {
-  default = ""
+  type = string
 }
 
 variable "image_tag" {
@@ -33,11 +33,11 @@ variable "app_count" {
 }
 
 variable "alb_target_group" {
-  default = ""
+  type = string
 }
 
 variable "aws_ecr_repository_url" {
-  default = ""
+  type = string
 }
 
 variable "alb_sg" {
