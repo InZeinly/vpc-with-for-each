@@ -1,4 +1,4 @@
-environment = "testenv"
+env = "testenv"
 app_name = "testapp"
 aws_account = "152617774363"
 aws_region = "eu-central-1"
