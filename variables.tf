@@ -48,7 +48,7 @@ variable "server_image" {
 
 variable "bucket" {
     type = string
-    default = "inzeintestbucket"
+    default = "inzeintestbucket2198312312"
 }
 
 variable "aws_profile" {
