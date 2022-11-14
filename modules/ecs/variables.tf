@@ -41,5 +41,5 @@ variable "aws_ecr_repository_url" {
 }
 
 variable "alb_sg" {
-  default = ""
+  type = string
 }
