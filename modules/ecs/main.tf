@@ -210,7 +210,7 @@ resource "aws_ecs_service" "ecs" {
     ]
 }
 
-module "abv" {
+module "alb" {
   source = "./modules/alb"
 }
 
