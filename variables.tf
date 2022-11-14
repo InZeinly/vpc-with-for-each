@@ -29,7 +29,9 @@ variable "branch_pattern" {
     type = string
 }
 
-variable "alb_target_group" {}
+variable "alb_target_group" {
+    default = module.alb.alb_target_group
+}
 
 variable "app_name" {
     default = "testapp"
@@ -52,5 +54,7 @@ variable "aws_profile" {
     default = "inzein"
 }
 
-variable "alb_sg" {}
+variable "alb_sg" {
+    default = module.alb.alb_sg
+}
 
