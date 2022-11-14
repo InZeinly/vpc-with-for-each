@@ -60,4 +60,6 @@ variable "alb_sg" {
     default = ""
 }
 
-variable "aws_ecr_repository_url" {}
+variable "aws_ecr_repository_url" {
+    default = ""
+}
