@@ -31,6 +31,7 @@ variable "branch_pattern" {
 
 variable "alb_target_group" {
     type = string
+    default = ""
 }
 
 variable "app_name" {
@@ -55,6 +56,6 @@ variable "aws_profile" {
 }
 
 variable "alb_sg" {
-    type = string
+    default = ""
 }
 
