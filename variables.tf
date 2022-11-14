@@ -59,3 +59,4 @@ variable "alb_sg" {
     default = ""
 }
 
+variable "aws_ecr_repository_url" {}
