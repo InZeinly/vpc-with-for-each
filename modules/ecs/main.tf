@@ -210,9 +210,6 @@ resource "aws_ecs_service" "ecs" {
     ]
 }
 
-module "alb" {
-  source = "./modules/alb"
-}
 
 resource "aws_security_group" "task_sg" {
   name = "task_sg"
@@ -223,7 +220,7 @@ resource "aws_security_group" "task_sg" {
     from_port   = 80 #5000
     to_port     = 80 #5000
     cidr_blocks = ["0.0.0.0/0"]
-    security_groups = module.alb.alb_sg
+    # security_groups = module.alb.alb_sg
   }
 
   egress {
