@@ -33,6 +33,7 @@ module "alb" {
 
 module "ecs" {
   source = "./modules/ecs"
+  aws_ecr_repository_url = var.aws_ecr_repository_url
   vpc_id = module.vpc.vpc_id
   private_subnet_id = module.vpc.private_subnet_id
   alb_listener = module.alb.alb_listener
