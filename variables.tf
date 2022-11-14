@@ -54,3 +54,7 @@ variable "bucket" {
 variable "aws_profile" {
     default = "inzein"
 }
+
+variable "alb_sg" {
+    default = ""
+}
