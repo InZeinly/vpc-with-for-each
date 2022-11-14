@@ -11,5 +11,5 @@ output "alb_target_group" {
 }
 
 output "alb_sg" {
-  value = aws_security_group.alb_sg.id
+  value = aws_security_group.alb_sg.name
 }
