@@ -40,6 +40,7 @@ module "ecs" {
   app_name = "testapp"
   app_count = var.app_count
   alb_target_group = module.alb.alb_target_group
+  alb_sg = var.alb_sg
 
   depends_on = [
     module.alb , module.vpc
