@@ -76,14 +76,14 @@ module "codebuild" {
     ]
 }
 
-# module "init-build" {
-#   source = "./modules/init-build"
-#   region = var.region
-#   aws_profile = var.aws_profile
-#   bucket = var.bucket
-#   env    = var.env
-#   app_name = var.app_name
-#   working_dir = "${path.root}/project"
-#   image_tag = var.image_tag
+module "init-build" {
+  source = "./modules/init-build"
+  region = var.region
+  aws_profile = var.aws_profile
+  bucket = var.bucket
+  env    = var.env
+  app_name = var.app_name
+  working_dir = "${path.root}/project"
+  image_tag = var.image_tag
 
-# }
+}
