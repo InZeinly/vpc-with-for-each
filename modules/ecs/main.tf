@@ -167,8 +167,8 @@ resource "aws_ecs_task_definition" "task-definition" {
         essential = true
         portMappings = [
             {
-                containerPort = 80
-                hostPort = 80
+                containerPort = 5000
+                hostPort = 5000
             }
         ],
         environment = [
@@ -200,7 +200,7 @@ resource "aws_ecs_service" "ecs" {
     load_balancer {
       target_group_arn = var.alb_target_group
       container_name = "${var.app_name}-${var.env}-app"
-      container_port = 80
+      container_port = 5000
     }
 
 
@@ -217,8 +217,8 @@ resource "aws_security_group" "task_sg" {
 
     ingress {
     protocol    = "tcp"
-    from_port   = 80 #5000
-    to_port     = 80 #5000
+    from_port   = 5000
+    to_port     = 5000
     cidr_blocks = ["0.0.0.0/0"]
     # security_groups = module.alb.alb_sg
   }

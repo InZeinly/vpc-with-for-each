@@ -22,7 +22,7 @@ variable "COMMIT_MESSAGE" {
   default = "(test)$"
 }
 
-variable "environment" {
+variable "env" {
   default = "testenv"
 }
 
@@ -39,8 +39,8 @@ variable "branch_pattern" {}
 # }
 
 locals {
-  codebuild_project_name = "${var.app_name}-${var.environment}"
-  description = "Codebuild for ${var.app_name} environment ${var.environment}"
+  codebuild_project_name = "${var.app_name}-${var.env}"
+  description = "Codebuild for ${var.app_name} environment ${var.env}"
 }
 
 variable "server_image" {
