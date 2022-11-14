@@ -210,8 +210,11 @@ resource "aws_ecs_service" "ecs" {
     ]
 }
 
-resource "aws_security_group" "task_sg" {
+module "abv" {
   source = "./modules/alb"
+}
+
+resource "aws_security_group" "task_sg" {
   name = "task_sg"
   vpc_id = var.vpc_id
 
