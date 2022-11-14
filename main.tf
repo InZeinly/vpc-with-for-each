@@ -43,7 +43,7 @@ module "ecs" {
   alb_target_group = module.alb.alb_target_group
   alb_sg = var.alb_sg
   server_image = var.server_image
-
+  aws_ecr_repository_url = var.aws_ecr_repository_url
   depends_on = [
     module.alb , module.vpc
   ]
@@ -55,7 +55,6 @@ module "ecr" {
   app_name = var.app_name
   env = var.env
   server_image = var.server_image
-  aws_ecr_repository_url = var.aws_ecr_repository_url
 }
 
 module "s3_bucket" {
