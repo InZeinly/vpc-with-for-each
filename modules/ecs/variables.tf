@@ -36,9 +36,7 @@ variable "alb_target_group" {
   default = ""
 }
 
-variable "aws_ecr_repository_url" {
-  default = ""
-}
+variable "aws_ecr_repository_url" {}
 
 variable "alb_sg" {
   type = string
