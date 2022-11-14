@@ -167,8 +167,8 @@ resource "aws_ecs_task_definition" "task-definition" {
         essential = true
         portMappings = [
             {
-                containerPort = 5000
-                hostPort = 5000
+                containerPort = 80
+                hostPort = 80
             }
         ],
         environment = [
@@ -200,7 +200,7 @@ resource "aws_ecs_service" "ecs" {
     load_balancer {
       target_group_arn = var.alb_target_group
       container_name = "${var.app_name}-${var.env}-app"
-      container_port = 5000
+      container_port = 80
     }
 
 

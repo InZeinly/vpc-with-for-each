@@ -47,7 +47,7 @@ resource "aws_security_group" "alb_sg" {
 
 resource "aws_alb_target_group" "app" {
   name = "targetGroup"
-  port = 5000
+  port = 80
   protocol = "HTTP"
   vpc_id = var.vpc_id
   target_type = "ip"
