@@ -58,8 +58,3 @@ variable "alb_sg" {
     type = string
 }
 
-variable "alb_target_group" {
-    type = string
-}
-
-
