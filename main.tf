@@ -55,6 +55,7 @@ module "ecr" {
   app_name = var.app_name
   env = var.env
   server_image = var.server_image
+  aws_ecr_repository_url = var.aws_ecr_repository_url
 }
 
 module "s3_bucket" {
