@@ -30,7 +30,7 @@ variable "branch_pattern" {
 }
 
 variable "alb_target_group" {
-    default = module.alb.alb_target_group
+    type = string
 }
 
 variable "app_name" {
@@ -55,6 +55,6 @@ variable "aws_profile" {
 }
 
 variable "alb_sg" {
-    default = module.alb.alb_sg
+    type = string
 }
 
