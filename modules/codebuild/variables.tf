@@ -42,3 +42,7 @@ locals {
   codebuild_project_name = "${var.app_name}-${var.environment}"
   description = "Codebuild for ${var.app_name} environment ${var.environment}"
 }
+
+variable "server_image" {
+    default = "152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv"
+}

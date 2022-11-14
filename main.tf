@@ -24,6 +24,7 @@ module "alb" {
   vpc_id = module.vpc.vpc_id
   public_subnet_id = module.vpc.public_subnet_id
   private_subnet_cidr = module.vpc.private_subnet_id
+  server_image = var.server_image
 
   depends_on = [
     module.vpc
@@ -41,6 +42,7 @@ module "ecs" {
   app_count = var.app_count
   alb_target_group = module.alb.alb_target_group
   alb_sg = var.alb_sg
+  server_image = var.server_image
 
   depends_on = [
     module.alb , module.vpc
@@ -52,6 +54,7 @@ module "ecr" {
   aws_region = var.region
   app_name = var.app_name
   env = var.env
+  server_image = var.server_image
 }
 
 module "s3_bucket" {
@@ -70,6 +73,7 @@ module "codebuild" {
     # git_trigger_event = var.git_trigger_event
     COMMIT_MESSAGE = var.COMMIT_MESSAGE
     build_spec_file = "project/config/buildspec.yml"
+    server_image = var.server_image
 
     depends_on = [
       module.vpc, module.alb, module.ecs, module.ecr
