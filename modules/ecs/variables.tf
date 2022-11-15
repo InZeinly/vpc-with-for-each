@@ -68,6 +68,4 @@ variable "web_server_fargate_memory" {
   default     = 2048
 }
 
-variable "taskdef_template" {
-  default = "cb_app.json.tpl"
-}
+variable "taskdef_template" {}
