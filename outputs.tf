@@ -15,5 +15,5 @@ output "branch_pattern" {
 }
 
 output "image" {
-  value = local.image
+  value = image
 }
