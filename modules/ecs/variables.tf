@@ -67,3 +67,7 @@ variable "web_server_fargate_memory" {
   description = "Fargate instance memory to provision for web server (in MiB)"
   default     = 2048
 }
+
+variable "taskdef_template" {
+  default = "cb_app.json.tpl"
+}
