@@ -13,7 +13,3 @@ output "app_count" {
 output "branch_pattern" {
   value = var.branch_pattern
 }
-
-output "image" {
-  value = local.image
-}
