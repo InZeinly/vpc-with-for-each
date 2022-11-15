@@ -5,3 +5,7 @@ output "iam_role" {
 output "app_count" {
   value = var.app_count
 }
+
+output "image" {
+  value = local.image
+}
