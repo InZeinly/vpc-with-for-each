@@ -8,3 +8,4 @@ secret.tfvars
 ./secret.tfvars
 secret.tfvars
 .terraform
+softservecodebuild.code-workspace
