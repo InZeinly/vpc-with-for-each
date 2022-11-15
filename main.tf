@@ -45,7 +45,7 @@ module "ecs" {
   alb_sg = var.alb_sg
   server_image = var.server_image
   depends_on = [
-    module.alb , module.vpc
+    module.alb , module.vpc, module.ecr, module.init-build
   ]
 }
 
