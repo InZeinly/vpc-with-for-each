@@ -44,6 +44,7 @@ module "ecs" {
   alb_target_group = module.alb.alb_target_group
   alb_sg = var.alb_sg
   server_image = var.server_image
+  taskdef_template = "${path.root}/modules/ecs/cb_app.json.tpl"
   depends_on = [
     module.alb , module.vpc, module.ecr, module.init-build
   ]
