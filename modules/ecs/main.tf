@@ -150,6 +150,21 @@ resource "aws_ecs_cluster" "test_cluster" {
 #   image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
 # }
 
+data "template_file" "cb_app" {
+  template = file(var.taskdef_template)
+
+  vars = {
+    image                     = local.image
+    app_port                  = var.app_port
+    web_server_fargate_cpu    = var.web_server_fargate_cpu
+    web_server_fargate_memory = var.web_server_fargate_memory
+    aws_region                = var.aws_region
+    env                       = var.env
+    app_name                  = var.app_name
+    image_tag                 = var.image_tag
+  }
+}
+
 resource "aws_ecs_task_definition" "task-definition" {
   family = "${var.app_name}-${var.env}-task"
   execution_role_arn = aws_iam_role.TaskExecRole.arn
@@ -158,28 +173,29 @@ resource "aws_ecs_task_definition" "task-definition" {
   requires_compatibilities = ["FARGATE"]
   cpu = "1024"
   memory = "2048"
-  container_definitions = jsonencode([
-    {
-        name = "${var.app_name}-${var.env}-app"
-        image = "${var.aws_ecr_repository_url.test_repo.repository_url}:${var.image_tag}" #"${local.image}"
-        #"152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv${var.image_tag}"
-        #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
-        essential = true
-        portMappings = [
-            {
-                containerPort = 5000
-                hostPort = 5000
-            }
-        ],
-        environment = [
-          {
-                name = "VERSION"
-                value = "${var.image_tag}"
-                # value = "${var.app_name}${var.image_tag}"
-          }
-        ]
-    }
-  ])
+  container_definitions = data.template_file.cb_app.rendered 
+  # container_definitions = jsonencode([
+  #   {
+  #       name = "${var.app_name}-${var.env}-app"
+  #       image = "${var.aws_ecr_repository_url.test_repo.repository_url}:${var.image_tag}" #"${local.image}"
+  #       #"152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv${var.image_tag}"
+  #       #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
+  #       essential = true
+  #       portMappings = [
+  #           {
+  #               containerPort = 5000
+  #               hostPort = 5000
+  #           }
+  #       ],
+  #       environment = [
+  #         {
+  #               name = "VERSION"
+  #               value = "${var.image_tag}"
+  #               # value = "${var.app_name}${var.image_tag}"
+  #         }
+  #       ]
+  #   }
+  # ])
 }
 
 resource "aws_ecs_service" "ecs" {

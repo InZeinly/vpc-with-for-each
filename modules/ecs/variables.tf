@@ -49,3 +49,21 @@ variable "server_image" {
 locals {
   image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
 }
+
+variable "app_port" {
+  default = 5000
+}
+
+variable "aws_region" {
+  default = "eu-central-1"
+}
+
+variable "web_server_fargate_cpu" {
+  description = "Fargate instance CPU units to provision for web server (1 vCPU = 1024 CPU units)"
+  default     = 1024
+}
+
+variable "web_server_fargate_memory" {
+  description = "Fargate instance memory to provision for web server (in MiB)"
+  default     = 2048
+}
