@@ -45,3 +45,7 @@ variable "alb_sg" {
 variable "server_image" {
     default = "152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv"
 }
+
+locals {
+  image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
+}
