@@ -65,5 +65,5 @@ variable "aws_ecr_repository_url" {
 }
 
 variable "image" {
-    type = string
+    default = ""
 }
