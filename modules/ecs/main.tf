@@ -161,7 +161,7 @@ resource "aws_ecs_task_definition" "task-definition" {
   container_definitions = jsonencode([
     {
         name = "${var.app_name}-${var.env}-app"
-        image = "${var.aws_ecr_repository_url}:${var.image_tag}" #"${local.image}"
+        image = "${var.aws_ecr_repository_url.test_repo.repository_url}:${var.image_tag}" #"${local.image}"
         #"152617774363.dkr.ecr.eu-central-1.amazonaws.com/testapp-testenv${var.image_tag}"
         #"${var.aws_ecr_repository_url}${var.image_tag}" #"nginx:latest"
         essential = true
