@@ -47,7 +47,7 @@ variable "server_image" {
 }
 
 locals {
-  image = format("%s:%s", var.aws_ecr_repository_url, var.image_tag)
+  image = format("%s:%s", var.server_image, var.image_tag)
 }
 
 variable "app_port" {
