@@ -63,3 +63,5 @@ variable "alb_sg" {
 variable "aws_ecr_repository_url" {
     default = ""
 }
+
+variable "image" {}
